@@ -1,14 +1,7 @@
 import { combineReducers } from 'redux';
 
-//redux state
-const initialState = {
-  auth: false,
-  user: '',
-  password: '',
-};
-
 //reducer to authenticate
-const auth = (state = initialState.auth, action) => {
+const auth = (state = false, action) => {
   switch (action.type) {
   case 'AUTH_TRUE' : {
       return {
@@ -25,7 +18,7 @@ const auth = (state = initialState.auth, action) => {
   }
 };
 
-const user = (state = initialState.user, action) =>{
+const user = (state = '', action) =>{
   switch (action.type) {
     case 'CHANGE_USER':{
             return {
@@ -37,7 +30,7 @@ const user = (state = initialState.user, action) =>{
     } 
 }
 
-const password = (state = initialState.password, action) =>{
+const password = (state = '', action) =>{
   switch (action.type) {
     case 'CHANGE_PASS':{
             return {

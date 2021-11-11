@@ -1,19 +1,13 @@
 import { authFalse, authTrue, changeUser, changePass } from '../actions';
 import { connect } from 'react-redux';
-
+import apiService from '../APIservice';
 
 function Login ({user, password, changeUser, changePass}) {
 
     async function logAttempt(userObject) {
-        return fetch(`http://localhost:3001/login`, {
-            method: 'POST',
-            credentials: 'include',
-            mode: 'cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(userObject),
-          })
-            .then((res) => res.json())
-            .catch((err) => console.log(err));
+      const response = await apiService.login(userObject)
+      console.log(response.status)
+
     } 
 
     return (
@@ -22,8 +16,8 @@ function Login ({user, password, changeUser, changePass}) {
                 <h2>Log In</h2>
                 <form onSubmit={(e) => {
                     e.preventDefault();
-                    const result = logAttempt({user: user.user, password: password.password})
-                    console.log(result)
+                    logAttempt({username: user.user, password: password.password})
+
                     }
                 }>
                     <input

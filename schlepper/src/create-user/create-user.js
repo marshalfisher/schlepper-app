@@ -1,15 +1,16 @@
-import { authTrue, changeUser, changeCollection, changeWants } from '../actions';
+import { authTrue, changeUser } from '../actions';
 import apiService from '../APIservice';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import './login.css'
+import './create-user.css'
 
 const initialState = {
   username: '',
+  email: '',
   password: '',
 };
 
-function Login () {
+function CreateUser () {
   
   const dispatch = useDispatch();
   const [state, setState] = useState(initialState);
@@ -25,23 +26,19 @@ function Login () {
   };
 
   async function logAttempt(userObject) {
-      console.log(userObject)
-      const response = await apiService.login(userObject);
-      if (response.confirmed) {
-        const {accessToken, collection, wants} = response;
-        localStorage.setItem('accessToken', accessToken);
-        dispatch(changeUser(userObject.username));
-        dispatch(changeCollection(JSON.parse(collection)))
-        dispatch(changeWants(JSON.parse(wants)))
-        dispatch(authTrue());
-      } else alert('Invalid Username or Password')
-      
+    const response = await apiService.createUser(userObject);
+    if (response.confirmed) {
+      const {accessToken} = response;
+      localStorage.setItem('accessToken', accessToken);
+      dispatch(changeUser(userObject.username));
+      dispatch(authTrue());
+    }
   } 
 
   return (
       <div className="container">
-          <div className="login">
-              <h2>Log In</h2>
+          <div className="create-user">
+              <h2>Create New User</h2>
               <form onSubmit={(e) => {
                   e.preventDefault();
                   logAttempt(state);
@@ -56,17 +53,24 @@ function Login () {
                     onChange={handleChange}
                   />
                   <input
+                    type="email"
+                    placeholder="Email"
+                    name="email"
+                    value={state.email}
+                    onChange={handleChange}
+                  />
+                  <input
                     type="password"
                     placeholder="Password"
                     name="password"
                     value={state.password}
                     onChange={handleChange}
                   />
-                  <input type="submit" value="Log In" className="button"/>
+                  <input type="submit" value="Create Account" className="button"/>
              </form>
           </div>
       </div>
   )
 }
 
-export default Login;
+export default CreateUser;

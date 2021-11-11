@@ -2,17 +2,22 @@
 const db = require('../models/index.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
+const SECRET_KEY = 'B-)'
 
 async function login(req, res) {
   try {
-    const username = req.body.username;
-    const password = req.body.password;
-    if (username !=null) {
-      const match = await db.User.findOne({where: { username: `${username}`, password: `${password}` }});
-      if (match) {
-        res.status(200).send(match);
-      } else res.status(409).send('nope')
-    }
+    const {username, password} = req.body;
+    console.log(username, password)
+    const match = await db.User.findOne({where: { username: `${username}`}});
+    const validatedUser = await bcrypt.compare(password, match.password)
+    if (validatedUser) {
+      console.log('validated user: ' + match.id)
+      const accessToken = jwt.sign({ _id: match.id }, SECRET_KEY);
+
+        res.status(200).send({confirmed: true, accessToken, collection: match.collection, wants: match.wants});
+      } else res.status(400).send({confirmed: false})
   } catch (e) {
     console.log(e);
     res.status(500);
@@ -23,24 +28,86 @@ async function addUser(req, res) {
   try {
     const {username, email, password} = req.body;
     const hash = await bcrypt.hash(password, 10)
-    const user = await db.User.findOne({ email: email });
+    const user = await db.User.findOne({where: { username: username }});
     if (user) {
-    
-      return res.status(409).send({ error: '409', message: user });
+      return res.status(409).send({ error: '409', message: "Username already in use." });
     }
     const newUser = await db.User.create({
       username,
       email,
-      password: hash
+      password: hash,
+      collection:"[]",
+      wants: "[]"
     });
     if(newUser){
-      res.status(201).send("did it")
-    } else res.status(409).send("can't do it")
+      const accessToken = jwt.sign({ _id: newUser.id }, SECRET_KEY);
+      res.status(201).send({confirmed: true, accessToken, collection:[], wants:[]})
+    } else res.status(409).send({ error: '409', message: "Username already in use." })
   } catch (e) {
     console.log(e)
     res.status(500);
   }
   }; 
 
+  async function addCollection (req, res) {
+    
+    try{
+      const {username, album} = req.body;
+      await db.User.findOne({where: { username: username },})
+      .then((user) => {
+        const collection = JSON.parse(user.collection)
+        if (collection.indexOf(album) === -1) {
+        const newCollection = [...collection, album]
+        resCollection = JSON.stringify(newCollection)
+        user.update({collection: JSON.stringify(newCollection)})
+        res.status(201).send(newCollection)
+        } else res.status(200).send(collection)
 
-module.exports = {login, addUser}
+      })
+
+    } catch (e) {
+      console.log(e)
+      res.status(500)
+    }
+  }
+
+  async function addWant (req, res) {
+    try{
+      const {username, album} = req.body;
+      await db.User.findOne({where: { username: username },})
+      .then((user) => {
+        const wants = JSON.parse(user.wants)
+        if (wants.indexOf(album) === -1) {
+        const newWants = [...wants, album]
+        reswants = JSON.stringify(newWants)
+        user.update({wants: JSON.stringify(newWants)})
+        res.status(201).send(newWants)
+        } else res.status(200).send(wants)
+
+      })
+
+    } catch (e) {
+      console.log(e)
+      res.status(500)
+    }
+  }
+
+  async function callAPI (req, res) {
+    try {
+      const {id} = req.body
+      const resAPI = await fetch(`https://api.discogs.com/releases/${id}`, {
+        headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': 'Discogs key=BOmgHpLNRiuTWXZGgEPm, secret=sIVZFKlfhSpDjQglswQeYRNGJgfXfyjS'
+        }
+      })
+      const response = await resAPI.json()
+     res.status(200).send(response)
+    } catch (e) {
+      console.log(e)
+      res.status(500)
+    }
+
+  }
+
+module.exports = {login, addUser, addCollection, addWant, callAPI}

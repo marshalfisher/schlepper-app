@@ -10,6 +10,14 @@ export const changeUser = (text) =>{
     return {type: 'CHANGE_USER', text}
 }
 
-export const changePass = (text) =>{
-    return {type: 'CHANGE_PASS', text}
+export const changeToken = (text) =>{
+  return {type: 'CHANGE_TOKEN', text}
+}
+
+export const changeCollection = (array) =>{
+  return {type: 'CHANGE_COLLECTION', array}
+}
+
+export const changeWants = (array) =>{
+  return {type: 'CHANGE_WANTS', array}
 }

@@ -30,12 +30,36 @@ const user = (state = '', action) =>{
     } 
 }
 
-const password = (state = '', action) =>{
+const token = (state = '', action) =>{
   switch (action.type) {
-    case 'CHANGE_PASS':{
+    case 'CHANGE_TOKEN':{
             return {
                 ...state,
-                password: action.text,
+                token: action.text,
+            }
+        }
+        default : return state;
+    } 
+}
+
+const collection = (state = [], action) =>{
+  switch (action.type) {
+    case 'CHANGE_COLLECTION':{
+            return {
+                ...state,
+                collection: [...action.array],
+            }
+        }
+        default : return state;
+    } 
+}
+
+const wants = (state = [], action) =>{
+  switch (action.type) {
+    case 'CHANGE_WANTS':{
+            return {
+                ...state,
+                wants: [...action.array],
             }
         }
         default : return state;
@@ -46,7 +70,9 @@ const password = (state = '', action) =>{
 const reducers = combineReducers({
   auth,
   user,
-  password
+  token,
+  collection,
+  wants,
 });
 
 export default reducers;

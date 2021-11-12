@@ -1,11 +1,10 @@
 import './App.css';
 import { connect, useSelector} from 'react-redux';
-import Dashboard from './dashboard/dashboard'
 import Login from './login/login'
 import Navbar from './navbar/navbar';
 import CreateUser from './create-user/create-user';
-import {useState, useEffect} from 'react'
-
+import {useState} from 'react'
+import Home from './home/home';
 
 
 function App() {
@@ -15,10 +14,7 @@ function App() {
 
 
   const [logStatus, changeLogStatus] = useState(true)
-  
-  useEffect(()=>{
-    console.log("placeholderrrrr")
-  },[])
+
 
   function handleClick () {
     if (logStatus === true) {
@@ -30,20 +26,45 @@ function App() {
   } 
 
   return (
-    <div className="app">
-    < Navbar />
-    {authorized? <Dashboard/> : 
-      <div className="intro"> 
-        { logStatus? <div className="log-box">
-          <Login/>
-        <button onClick={handleClick}>Create Account</button>
-        </div> : 
-        <div className="create-box">  
-          <CreateUser />
-          <button onClick={handleClick}>Log In</button>
-        </div>}
-      </div>  
-    }
+    <div className ="skin">
+      <div className="app">
+      {!authorized && < Navbar />}
+      {authorized? <Home/> : 
+        <div className="intro"> 
+          { logStatus? <div className="log-box">
+            <Login/>
+          <button onClick={handleClick}>Create Account</button>
+          </div> : 
+          <div className="create-box">  
+            <CreateUser />
+            <button onClick={handleClick}>Log In</button>
+          </div>}
+        </div>  
+      }
+      </div>
+      <div className="face">
+        <div className="eye">
+          <div className="iris"></div>
+        </div>
+        <div className="nose">
+        </div>
+        <div className="mouth">
+          <div className="teeth">
+            <div className="tooth"></div>
+            <div className="tooth"></div>
+            <div className="tooth"></div>
+            <div className="tooth"></div>
+            <div className="tooth"></div>
+          </div>
+          <div className="teeth">
+            <div className="tooth"></div>
+            <div className="tooth"></div>
+            <div className="tooth"></div>
+            <div className="tooth"></div>
+            <div className="tooth"></div>
+          </div>
+        </div>
+      </div> 
     </div>
   );
 }

@@ -50,7 +50,6 @@ async function addUser(req, res) {
   }; 
 
   async function addCollection (req, res) {
-    
     try{
       const {username, album} = req.body;
       await db.User.findOne({where: { username: username },})
@@ -58,13 +57,10 @@ async function addUser(req, res) {
         const collection = JSON.parse(user.collection)
         if (collection.indexOf(album) === -1) {
         const newCollection = [...collection, album]
-        resCollection = JSON.stringify(newCollection)
         user.update({collection: JSON.stringify(newCollection)})
         res.status(201).send(newCollection)
         } else res.status(200).send(collection)
-
       })
-
     } catch (e) {
       console.log(e)
       res.status(500)
@@ -83,9 +79,7 @@ async function addUser(req, res) {
         user.update({wants: JSON.stringify(newWants)})
         res.status(201).send(newWants)
         } else res.status(200).send(wants)
-
       })
-
     } catch (e) {
       console.log(e)
       res.status(500)
@@ -98,7 +92,8 @@ async function addUser(req, res) {
       const resAPI = await fetch(`https://api.discogs.com/releases/${id}`, {
         headers: { 
         'Content-Type': 'application/json',
-        'Authorization': 'Discogs key=BOmgHpLNRiuTWXZGgEPm, secret=sIVZFKlfhSpDjQglswQeYRNGJgfXfyjS'
+        'Authorization': 'Discogs key=BOmgHpLNRiuTWXZGgEPm, secret=sIVZFKlfhSpDjQglswQeYRNGJgfXfyjS',
+        'User-Agent': 'Schlepper/0.0.1'
         }
       })
       const response = await resAPI.json()
@@ -107,7 +102,69 @@ async function addUser(req, res) {
       console.log(e)
       res.status(500)
     }
-
   }
 
-module.exports = {login, addUser, addCollection, addWant, callAPI}
+  async function searchAPI (req, res) {
+    try {
+      const {query, type} = req.body;
+      const resAPI = await fetch(`https://api.discogs.com//database/search?q=${query}&type=${type}`, {
+        headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': 'Discogs key=BOmgHpLNRiuTWXZGgEPm, secret=sIVZFKlfhSpDjQglswQeYRNGJgfXfyjS',
+        'User-Agent': 'Schlepper/0.0.1'
+        }
+      })
+      const response = await resAPI.json()
+     res.status(200).send(response)
+    } catch (e) {
+      console.log(e)
+      res.status(500)
+    }
+  }
+
+  async function deleteCollection (req, res) {
+    try{
+      const {username, album} = req.body;
+      await db.User.findOne({where: { username: username },})
+      .then((user) => {
+        const collection = JSON.parse(user.collection)
+        if (collection.indexOf(album) !== -1) {
+        const newCollection = collection.filter((albumID) => albumID != album)
+        user.update({collection: JSON.stringify(newCollection)})
+        res.status(201).send(newCollection)
+        } else res.status(200).send(collection)
+      })
+    } catch (e) {
+      console.log(e)
+      res.status(500)
+    } 
+  }
+
+  async function deleteWant (req, res) {
+    try{
+      const {username, album} = req.body;
+      await db.User.findOne({where: { username: username },})
+      .then((user) => {
+        const wants = JSON.parse(user.wants)
+        if (wants.indexOf(album) !== -1) {
+        const newWants = wants.filter((albumID) => albumID != album)
+        user.update({wants: JSON.stringify(newWants)})
+        res.status(201).send(newWants)
+        } else res.status(200).send(wants)
+      })
+    } catch (e) {
+      console.log(e)
+      res.status(500)
+    }
+  }
+
+module.exports = {
+  login,
+  addUser,
+  addCollection,
+  addWant,
+  callAPI,
+  deleteCollection,
+  deleteWant,
+  searchAPI,
+}

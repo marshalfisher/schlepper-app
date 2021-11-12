@@ -1,4 +1,4 @@
-import { authTrue, changeUser } from '../actions';
+import { authTrue, changeUser, changeCollection, changeWants } from '../actions';
 import apiService from '../APIservice';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -31,6 +31,8 @@ function CreateUser () {
       const {accessToken} = response;
       localStorage.setItem('accessToken', accessToken);
       dispatch(changeUser(userObject.username));
+      dispatch(changeWants([]));
+      dispatch(changeCollection([]));
       dispatch(authTrue());
     }
   } 

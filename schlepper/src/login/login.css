@@ -4,6 +4,7 @@
     align-items: center;
     background-color: rgb(247, 196, 176);
     border: 5px solid lightsalmon;
+    border-left: 0px;
     border-radius: 10px;
 }
 

@@ -1,16 +1,31 @@
 .mini {
   display: flex;
-
-  justify-content: space-evenly;
+  justify-content: space-between;
   text-align: right;
-  line-height: 76%;
   background-color: teal;
   color:aliceblue;
   border: 3px solid aquamarine;
   padding: 5px;
   width: 400px;
+  height: 100px;
+  line-height: 40%;
 }
 
-img{
+
+.mini p {
+  font-size: 12px;
+}
+
+.mini h2 {
+ font-size: 90%;
+}
+
+.mini button {
+  font-size: 50%;
+  position: relative;
+  top: -5px;
+}
+
+img {
   height: 100px;
 }

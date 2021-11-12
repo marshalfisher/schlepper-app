@@ -1,11 +1,12 @@
 .app {
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .log-box {
-  margin-top: 90px;
+  margin-top: 240px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,4 +31,53 @@ button:hover {
   background-color: white;
   color:lightseagreen;
   border: 1px solid lightseagreen
+}
+
+.face {
+  z-index: -10;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0px;
+  left: -10px;
+}
+
+.eye{
+  margin: 100px;
+  background-color: black;
+  border: 50px solid white;
+  width: 75px;
+  height: 75px;
+  border-radius: 200px;
+}
+
+.nose {
+  margin-bottom: 100px;
+  width: 100px;
+  height: 100px;
+  border-bottom: 10px solid blanchedalmond;
+  border-right: 10px solid blanchedalmond;
+  border-radius: 30px;
+}
+
+.mouth {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 240px;
+  border-radius: 4px;
+}
+
+.teeth {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.tooth {
+  margin: 2px;
+  background-color:white;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
 }

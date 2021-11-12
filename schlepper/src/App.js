@@ -22,7 +22,6 @@ function App() {
     } else {
       changeLogStatus(true)
     }
-    console.log(logStatus)
   } 
 
   return (

@@ -18,7 +18,10 @@ const Navbar = () => {
       {auth && 
       <div className="links">
       <Link to='/' style={style}>Dashboard</Link>
+      <Link to='/messages' style={style}>Messages</Link>
+      <Link to='/trades'style={style}>Trades</Link>
       <Link to='/search'style={style}>Search</Link>
+      <Link to='/profile' style={style}>Profle</Link>
       </div>
       }
     </div>

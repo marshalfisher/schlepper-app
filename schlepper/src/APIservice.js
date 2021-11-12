@@ -62,7 +62,6 @@ apiService.search = (query, type) => {
 
 //removes album from collection
 apiService.removeCollection = (object) =>{
-  console.log(object)
   //object should look like {id: * record ID*, user: *username*}
   return fetch(`${BASE_URL}/deleteCollection`, {
     method: 'DELETE',
@@ -110,6 +109,30 @@ apiService.addWant = (object) => {
   })
   .then((res) => res.json())
   .catch((err) => console.log(err))
+}
+
+apiService.findTrades = (area) => {
+  return fetch(`${BASE_URL}/findTrades`, {
+    method: 'POST',
+    headers : {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({area: area})
+  })
+  .then((res) => res.json())
+  .catch((err) => console.log(err));
+}
+
+apiService.getUser = (userID) => {
+  return fetch(`${BASE_URL}/getUser`, {
+    method: 'POST',
+    headers : {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userID)
+  })
+  .then((res) => res.json())
+  .catch((err) => console.log(err));
 }
 
 export default apiService

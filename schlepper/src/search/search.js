@@ -13,12 +13,11 @@ function Search () {
     }
     
     async function handleSubmit (e) {
-       e.preventDefault()
-       const res = await apiService.search(searchQuery, 'release')
-       if (res){
-           changeResults(res.results.slice(0,30))
-           console.log(results)
-       }
+        e.preventDefault()
+        const res = await apiService.search(searchQuery, 'release')
+        if (res){
+            changeResults(res.results.slice(0,30))
+        }
     }
 
     return (

@@ -66,6 +66,18 @@ const wants = (state = [], action) =>{
     } 
 }
 
+const viewedUser = (state = '', action) =>{
+  switch (action.type) {
+    case 'CHANGE_VIEWED_USER':{
+            return {
+                ...state,
+                viewedUser: action.username,
+            }
+        }
+        default : return state;
+    } 
+}
+
 // Combining both reducers
 const reducers = combineReducers({
   auth,
@@ -73,6 +85,7 @@ const reducers = combineReducers({
   token,
   collection,
   wants,
+  viewedUser,
 });
 
 export default reducers;

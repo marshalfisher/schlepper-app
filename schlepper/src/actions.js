@@ -21,3 +21,7 @@ export const changeCollection = (array) =>{
 export const changeWants = (array) =>{
   return {type: 'CHANGE_WANTS', array}
 }
+
+export const changeViewedUser = (username) =>{
+  return {type: 'CHANGE_VIEWED_USER', username}
+}

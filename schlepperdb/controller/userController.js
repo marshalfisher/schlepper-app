@@ -26,7 +26,7 @@ async function login(req, res) {
 
 async function addUser(req, res) {
   try {
-    const {username, email, password} = req.body;
+    const {username, email, password, city, state} = req.body;
     const hash = await bcrypt.hash(password, 10)
     const user = await db.User.findOne({where: { username: username }});
     if (user) {
@@ -37,7 +37,9 @@ async function addUser(req, res) {
       email,
       password: hash,
       collection:"[]",
-      wants: "[]"
+      wants: "[]",
+      city,
+      state,
     });
     if(newUser){
       const accessToken = jwt.sign({ _id: newUser.id }, SECRET_KEY);
@@ -158,6 +160,29 @@ async function addUser(req, res) {
     }
   }
 
+  async function findTrades (req, res) {
+    try{
+      const {area} = req.body
+      const matches = await db.User.findAll({where: { state: `${area}`}});
+      res.status(200).send(matches)
+    } catch (e) {
+      console.log(e)
+      res.status(500)
+    }
+  }
+
+  async function getUser (req, res) {
+    try{
+      const {username} = req.body
+      console.log(username)
+      const match = await db.User.findOne({where: { username: username}});
+      res.status(200).send(match)
+    } catch (e) {
+      console.log(e);
+      res.status(500)
+    }
+  }
+
 module.exports = {
   login,
   addUser,
@@ -167,4 +192,6 @@ module.exports = {
   deleteCollection,
   deleteWant,
   searchAPI,
+  findTrades,
+  getUser,
 }

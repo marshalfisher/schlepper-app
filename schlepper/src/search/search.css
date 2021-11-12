@@ -1,0 +1,37 @@
+.searchContainer {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.mini {
+    display: flex;
+    justify-content: space-between;
+    text-align: right;
+    background-color: teal;
+    color:aliceblue;
+    border: 3px solid aquamarine;
+    padding: 5px;
+    width: 400px;
+    height: 110px;
+    overflow: auto;
+  }
+  
+  
+  .mini p {
+    font-size: 12px;
+  }
+  
+  .mini h2 {
+   font-size: 80%;
+  }
+  
+  .mini button {
+    font-size: 50%;
+    position: relative;
+    top: -5px;
+    margin: 1px;
+  }
+  
+  img {
+    height: 100px;
+  }

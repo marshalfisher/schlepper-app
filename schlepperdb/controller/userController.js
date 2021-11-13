@@ -183,6 +183,14 @@ async function addUser(req, res) {
     }
   }
 
+  async function sendPhoto (req,res) {
+    try {
+      console.log("username: " + JSON.stringify(req.files))
+    } catch (e) {
+      console.log(e)
+      res.status(500)
+    }
+  }
 module.exports = {
   login,
   addUser,
@@ -194,4 +202,5 @@ module.exports = {
   searchAPI,
   findTrades,
   getUser,
+  sendPhoto,
 }

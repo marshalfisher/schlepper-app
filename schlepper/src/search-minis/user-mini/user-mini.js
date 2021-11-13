@@ -7,7 +7,7 @@ function UserMini ({u}) {
     const dispatch = useDispatch();
     
     function handleClick () {
-      dispatch(changeViewedUser(u.username))
+      dispatch(changeViewedUser(u.username));
     }
 
     return (
@@ -24,7 +24,7 @@ function UserMini ({u}) {
           </Link>
         </div>
       </div>
-    )
-}
+    );
+};
 
 export default UserMini

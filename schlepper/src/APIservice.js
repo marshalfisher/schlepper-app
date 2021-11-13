@@ -1,4 +1,6 @@
+import axios from 'axios';
 const BASE_URL = 'http://localhost:3001';
+
 
 const apiService = {};
 
@@ -133,6 +135,15 @@ apiService.getUser = (userID) => {
   })
   .then((res) => res.json())
   .catch((err) => console.log(err));
+}
+
+apiService.sendPhoto = (username, photo) => {
+  const fd= new FormData();
+  fd.append('image', photo, photo.name)
+  fd.append('username', username)
+  axios.post(`${BASE_URL}/sendPhoto`, fd)
+  .then((res) => console.log(res))
+  .catch((err) => console.log(err))
 }
 
 export default apiService

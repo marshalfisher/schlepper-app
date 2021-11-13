@@ -1,5 +1,15 @@
 const router = require('express').Router();
-const {login, addUser, addCollection, addWant, callAPI, deleteCollection, deleteWant, searchAPI, findTrades, getUser} = require('./controller/userController')
+const {login,
+    addUser,
+    addCollection,
+    addWant,
+    callAPI,
+    deleteCollection,
+    deleteWant,
+    searchAPI,
+    findTrades,
+    getUser,
+    sendPhoto} = require('./controller/userController')
 
 router.post('/login', login);
 router.post('/new', addUser);
@@ -9,6 +19,7 @@ router.post('/callAPI', callAPI)
 router.post('/searchAPI', searchAPI)
 router.post('/findTrades', findTrades)
 router.post('/getUser', getUser)
+router.post('/sendPhoto', sendPhoto)
 router.delete('/deleteCollection', deleteCollection)
 router.delete('/deleteWant', deleteWant)
 

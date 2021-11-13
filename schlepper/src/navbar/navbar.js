@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import './navbar.css';
 
 const Navbar = () => {
-  const auth = useSelector(state => state.auth.auth)
+  const auth = useSelector(state => state.auth.auth);
 
   const style = {
     textDecoration: 'none',
     color: 'white',
     marginLeft: '20px'
-    }
+    };
 
   return(
     <div className="navbar">
@@ -25,7 +25,7 @@ const Navbar = () => {
       </div>
       }
     </div>
-    )
+    );
   };
 
 export default Navbar;

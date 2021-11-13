@@ -1,23 +1,23 @@
-import { useEffect, useState } from 'react'
-import apiService from '../APIservice'
-import UserMini from '../search-minis/user-mini/user-mini'
-import './trades.css'
+import { useEffect, useState } from 'react';
+import apiService from '../APIservice';
+import UserMini from '../search-minis/user-mini/user-mini';
+import './trades.css';
 
 function TradesTab () {
 
-    const [area, changeArea] = useState('')
-    const [users, changeUsers] = useState([])
+    const [area, changeArea] = useState('');
+    const [users, changeUsers] = useState([]);
     
     function handleChange(e) {
-        changeArea(e.target.value)
+        changeArea(e.target.value);
     }
     
     useEffect(()=> {
         async function findTrades () {
-          const res = await apiService.findTrades(area)
-          changeUsers(res)
+          const res = await apiService.findTrades(area);
+          changeUsers(res);
         }
-        findTrades()
+        findTrades();
     },[area])
 
     return (
@@ -83,7 +83,7 @@ function TradesTab () {
               users.map(u => < UserMini key={u.username} u={u}/>)
             }
         </div>
-    )
+    );
 }
 
-export default TradesTab
+export default TradesTab;

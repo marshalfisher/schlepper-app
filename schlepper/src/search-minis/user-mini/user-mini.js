@@ -1,6 +1,6 @@
-import './user-mini.css'
-import {Link} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import './user-mini.css';
+import {Link} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 import { changeViewedUser } from '../../actions';
 
 function UserMini ({u}) {

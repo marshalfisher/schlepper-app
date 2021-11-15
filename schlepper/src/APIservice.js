@@ -13,7 +13,7 @@ apiService.login = (userObject) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userObject),
           })
-            .then((res) => res.json())
+            .then(res => res.json())
             .catch((err) => console.log(err));
 }
 
@@ -28,7 +28,7 @@ apiService.createUser = (userObject) => {
     },
       body: JSON.stringify(userObject),
     })
-      .then((res) => res.json())
+      .then(res => res.json())
       .catch((err) => console.log(err));
 }
 
@@ -42,7 +42,7 @@ apiService.getAlbumInfo = (id) => {
     },
     body: JSON.stringify({id: sureString})
   })
-  .then((res) => res.json())
+  .then(res => res.json())
   .catch((err) => console.log(err));
 }
 
@@ -58,7 +58,7 @@ apiService.search = (query, type) => {
     },
     body: JSON.stringify(queryObject)
   })
-  .then((res) => res.json())
+  .then(res => res.json())
   .catch((err)=> console.log(err));
 }
 
@@ -72,7 +72,7 @@ apiService.removeCollection = (object) =>{
     },
     body: JSON.stringify(object)
   })
-  .then((res) => res.json())
+  .then(res => res.json())
   .catch((err) => console.log(err));
 }
 
@@ -85,7 +85,7 @@ apiService.removeWant = (object) =>{
     },
     body: JSON.stringify(object)
   })
-  .then((res) => res.json())
+  .then(res => res.json())
   .catch((err) => console.log(err));
 }
 
@@ -97,7 +97,7 @@ apiService.addCollection = (object) => {
     },
     body: JSON.stringify(object)
   })
-  .then((res) => res.json())
+  .then(res => res.json())
   .catch((err) => console.log(err))
 }
 
@@ -109,7 +109,7 @@ apiService.addWant = (object) => {
     },
     body: JSON.stringify(object)
   })
-  .then((res) => res.json())
+  .then(res => res.json())
   .catch((err) => console.log(err))
 }
 
@@ -121,7 +121,7 @@ apiService.findTrades = (area) => {
     },
     body: JSON.stringify({area: area})
   })
-  .then((res) => res.json())
+  .then(res => res.json())
   .catch((err) => console.log(err));
 }
 
@@ -133,7 +133,7 @@ apiService.getUser = (userID) => {
     },
     body: JSON.stringify(userID)
   })
-  .then((res) => res.json())
+  .then(res => res.json())
   .catch((err) => console.log(err));
 }
 
@@ -170,6 +170,30 @@ apiService.sendMessage = (messageObject) => {
     body: JSON.stringify(messageObject)
   })
   .catch(e => console.log(e));
-
 } 
+
+apiService.getMessages = (user) => {
+  return fetch(`${BASE_URL}/getMessages`,{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({user})
+  })
+  .then(res => res.json())
+  .catch(e => console.log(e));
+} 
+
+apiService.deleteMessage = (id) => {
+  return fetch(`${BASE_URL}/deleteMessage` ,{
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({id})
+  })
+  .then(res => res.json())
+  .catch(e => console.log(e))
+}
+
 export default apiService

@@ -29,3 +29,7 @@ export const changeViewedUser = (username) => {
 export const changeEyedAlbum = (album) => {
   return {type: 'CHANGE_EYED_ALBUM', album}
 };
+
+export const changeOffer = (album) => {
+  return {type: 'CHANGE_OFFER', album}
+};

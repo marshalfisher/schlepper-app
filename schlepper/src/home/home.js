@@ -5,6 +5,7 @@ import Navbar from '../navbar/navbar';
 import TradesTab from '../trades/trades';
 import MessagesTab from '../messages/messages';
 import NewMessage from '../messages/new-message/new-message';
+import Reply from '../messages/reply/reply';
 import './home.css'
 import Profile from '../profile/profile';
 import {useSelector} from 'react-redux'
@@ -25,6 +26,7 @@ function Home () {
                 <Route path='/profile' exact element={<Profile username={username}/>}/>
                 <Route path='/user' element={<Profile username={viewedUser}/>}/>
                 <Route path='/newMessage' element={<NewMessage/>}/>
+                <Route path='reply' element={<Reply />}/>
             </Routes>
         </Router>
     )

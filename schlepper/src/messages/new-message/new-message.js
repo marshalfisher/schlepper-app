@@ -28,7 +28,7 @@ function NewMessage () {
     return (
         <div className="message-create">
             {status === 201 &&  <h1>Message Sent</h1>}
-            {status !== 201 && <h1>Message Failed to Send</h1>}
+            {status !== 0 && status !== 201 && <h1>Message Failed to Send</h1>}
             {!status && 
             <div>
             <h1>New Message</h1>

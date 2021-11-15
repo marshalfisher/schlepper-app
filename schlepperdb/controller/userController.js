@@ -3,6 +3,7 @@ const db = require('../models/index.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const path = require('path');
+const {Op} = require('sequelize')
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const SECRET_KEY = 'B-)'
@@ -230,6 +231,17 @@ async function addUser(req, res) {
     }
   }
 
+  async function getMessages (req, res) {
+    try {
+      const {user} = req.body;
+      const messages = await db.Message.findAll( { where: {[Op.or] : [{toUser: user}, {fromUser: user}] } } )
+      res.status(200).send(JSON.stringify(messages))
+    } catch (e) {
+      console.log(e);
+      res.status(500)
+    }
+  }
+
 module.exports = {
   login,
   addUser,
@@ -244,4 +256,5 @@ module.exports = {
   sendImage,
   updateUser,
   sendMessage,
+  getMessages,
 }

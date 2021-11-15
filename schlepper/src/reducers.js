@@ -90,6 +90,18 @@ const eyedAlbum = (state = '', action) => {
   }
 }
 
+const offer = (state = '', action) => {
+  switch(action.type) {
+    case 'CHANGE_OFFER' : {
+      return {
+        ...state,
+        offer: action.album
+      }
+    }
+    default : return state;
+  }
+}
+
 // Combining both reducers
 const reducers = combineReducers({
   auth,
@@ -99,6 +111,7 @@ const reducers = combineReducers({
   wants,
   viewedUser,
   eyedAlbum,
+  offer,
 });
 
 export default reducers;

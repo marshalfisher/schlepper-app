@@ -9,7 +9,10 @@ const {login,
     searchAPI,
     findTrades,
     getUser,
-    sendPhoto} = require('./controller/userController')
+    sendImage,
+    updateUser,
+    sendMessage,
+} = require('./controller/userController')
 
 router.post('/login', login);
 router.post('/new', addUser);
@@ -19,7 +22,9 @@ router.post('/callAPI', callAPI)
 router.post('/searchAPI', searchAPI)
 router.post('/findTrades', findTrades)
 router.post('/getUser', getUser)
-router.post('/sendPhoto', sendPhoto)
+router.post('/sendImage', sendImage)
+router.post('/updateUser', updateUser)
+router.post('/sendMessage', sendMessage)
 router.delete('/deleteCollection', deleteCollection)
 router.delete('/deleteWant', deleteWant)
 

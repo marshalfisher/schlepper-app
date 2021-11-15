@@ -22,6 +22,10 @@ export const changeWants = (array) =>{
   return {type: 'CHANGE_WANTS', array}
 };
 
-export const changeViewedUser = (username) =>{
+export const changeViewedUser = (username) => {
   return {type: 'CHANGE_VIEWED_USER', username}
+};
+
+export const changeEyedAlbum = (album) => {
+  return {type: 'CHANGE_EYED_ALBUM', album}
 };

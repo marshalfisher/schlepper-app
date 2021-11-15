@@ -137,13 +137,39 @@ apiService.getUser = (userID) => {
   .catch((err) => console.log(err));
 }
 
-apiService.sendPhoto = (username, photo) => {
+apiService.sendImage = (image) => {
   const fd= new FormData();
-  fd.append('image', photo, photo.name)
-  fd.append('username', username)
-  axios.post(`${BASE_URL}/sendPhoto`, fd)
-  .then((res) => console.log(res))
+  fd.append('image', image)
+  axios.post(`${BASE_URL}/sendImage`, fd, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+  })
   .catch((err) => console.log(err))
 }
 
+apiService.updateUser = (username, value, newValue) => {
+  const updateObject = {username, value, newValue}
+  return fetch(`${BASE_URL}/updateUser`,{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updateObject)
+  })
+  // .then(res => res.json())
+  .catch(e => console.log(e));
+}
+
+apiService.sendMessage = (messageObject) => {
+  return fetch(`${BASE_URL}/sendMessage`,{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(messageObject)
+  })
+  .catch(e => console.log(e));
+
+} 
 export default apiService

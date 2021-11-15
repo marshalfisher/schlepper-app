@@ -12,10 +12,7 @@ function UserMini ({u}) {
 
     return (
         <div className="mini">
-        {/* <img src={} alt="Profile Picture"/> */}
-        <div className="picture-placeholder">
-
-        </div>
+        <img src={`uploads/${u.photo}`} alt="Profile Picture"/> 
         <div className="mini-info">
           <h2>{u.username ? u.username : "Username"}</h2>
           <p>{u.city ? u.city : "City"}</p>

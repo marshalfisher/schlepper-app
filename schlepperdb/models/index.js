@@ -11,8 +11,11 @@ const db = {};
 
 
 const User = require('./user');
+const Message = require('./message')
 const UserModel = User(sequelize, Sequelize.DataTypes)
+const MessageModel = Message(sequelize, Sequelize.DataTypes)
 db[UserModel.name] = UserModel;
+db[MessageModel.name] = MessageModel;
 
 
 db.sequelize = sequelize;

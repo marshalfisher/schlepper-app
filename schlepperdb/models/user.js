@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       wants: DataTypes.STRING,
       state:DataTypes.STRING,
       city: DataTypes.STRING,
+      photo: DataTypes.STRING,
     })
     return User;
   }

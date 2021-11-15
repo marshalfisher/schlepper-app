@@ -39,7 +39,7 @@ function MiniAlbum ({username, albumID, handleClick, clickValue}) {
             <p>{artists ? artists : "Artist"}</p>
             <p>{label ? label : "Label"}</p>
             <p>{year ? year : "Year"}</p>
-            <button onClick={()=> handleClick(username, albumID)}>{clickValue}</button>
+            {clickValue && <button onClick={()=> handleClick(username, albumID)}>{clickValue}</button>}
           </div>
         </div>
     )

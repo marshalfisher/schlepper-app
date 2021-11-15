@@ -4,19 +4,19 @@ import apiService from '../APIservice'
 import ReleaseMini from '../search-minis/release-mini/release-mini';
 
 function Search () {
-    const [searchQuery, changeSearchQuery] = useState('')
-    const [results, changeResults] = useState([])
+    const [searchQuery, changeSearchQuery] = useState('');
+    const [results, changeResults] = useState([]);
     
     function handleChange(e){
         const query = e.target.value;
-        changeSearchQuery(query)
+        changeSearchQuery(query);
     }
     
     async function handleSubmit (e) {
-        e.preventDefault()
-        const res = await apiService.search(searchQuery, 'release')
+        e.preventDefault();
+        const res = await apiService.search(searchQuery, 'release');
         if (res){
-            changeResults(res.results.slice(0,30))
+            changeResults(res.results.slice(0,30));
         }
     }
 
@@ -40,6 +40,6 @@ function Search () {
              </div>
         </div>
     )
-}
+};
 
 export default Search;

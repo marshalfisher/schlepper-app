@@ -1,0 +1,32 @@
+.mini-message {
+    display: flex;
+    justify-content: space-between;
+    text-align: right;
+    background-color: teal;
+    color:aliceblue;
+    border: 3px solid aquamarine;
+    padding: 5px;
+    width: 400px;
+    height: 100px;
+    line-height: 40%;
+  }
+  
+  
+  .mini-message p {
+    font-size: 12px;
+  }
+  
+  .mini-message h2 {
+   font-size: 90%;
+  }
+  
+  .mini-message button {
+    margin-left: 2px;
+    font-size: 50%;
+    position: relative;
+    top: -5px;
+  }
+  
+  img {
+    height: 100px;
+  }

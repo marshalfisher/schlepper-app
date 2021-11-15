@@ -2,7 +2,7 @@ import { authTrue, changeUser, changeCollection, changeWants } from '../actions'
 import apiService from '../APIservice';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import './login.css'
+import './login.css';
 
 const initialState = {
   username: '',
@@ -25,16 +25,16 @@ function Login () {
   };
 
   async function logAttempt(userObject) {
-      console.log(userObject)
-      const response = await apiService.login(userObject);
-      if (response.confirmed) {
-        const {accessToken, collection, wants} = response;
-        localStorage.setItem('accessToken', accessToken);
-        dispatch(changeUser(userObject.username));
-        dispatch(changeCollection(JSON.parse(collection)))
-        dispatch(changeWants(JSON.parse(wants)))
-        dispatch(authTrue());
-      } else alert('Invalid Username or Password')
+    console.log(userObject)
+    const response = await apiService.login(userObject);
+    if (response.confirmed) {
+      const {accessToken, collection, wants} = response;
+      localStorage.setItem('accessToken', accessToken);
+      dispatch(changeUser(userObject.username));
+      dispatch(changeCollection(JSON.parse(collection)))
+      dispatch(changeWants(JSON.parse(wants)))
+      dispatch(authTrue());
+    } else alert('Invalid Username or Password')
       
   } 
 
@@ -66,7 +66,7 @@ function Login () {
              </form>
           </div>
       </div>
-  )
-}
+  );
+};
 
 export default Login;

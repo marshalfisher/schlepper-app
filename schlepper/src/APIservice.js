@@ -15,7 +15,7 @@ apiService.login = (userObject) => {
           })
             .then(res => res.json())
             .catch((err) => console.log(err));
-}
+};
 
 //creates a new user
 apiService.createUser = (userObject) => {
@@ -30,7 +30,7 @@ apiService.createUser = (userObject) => {
     })
       .then(res => res.json())
       .catch((err) => console.log(err));
-}
+};
 
 //get album info from Discogs API
 apiService.getAlbumInfo = (id) => {
@@ -44,8 +44,9 @@ apiService.getAlbumInfo = (id) => {
   })
   .then(res => res.json())
   .catch((err) => console.log(err));
-}
+};
 
+//searches the api
 apiService.search = (query, type) => {
   const queryObject = {
     query: String(query),
@@ -60,7 +61,7 @@ apiService.search = (query, type) => {
   })
   .then(res => res.json())
   .catch((err)=> console.log(err));
-}
+};
 
 //removes album from collection
 apiService.removeCollection = (object) =>{
@@ -74,8 +75,9 @@ apiService.removeCollection = (object) =>{
   })
   .then(res => res.json())
   .catch((err) => console.log(err));
-}
+};
 
+//removes item from want list
 apiService.removeWant = (object) =>{
   //object should look like {id: * record ID*, user: *username*}
   return fetch(`${BASE_URL}/deleteWant`, {
@@ -87,8 +89,9 @@ apiService.removeWant = (object) =>{
   })
   .then(res => res.json())
   .catch((err) => console.log(err));
-}
+};
 
+//add 1 item to user's collection
 apiService.addCollection = (object) => {
   return fetch(`${BASE_URL}/addCollection`, {
     method: 'POST',
@@ -99,8 +102,9 @@ apiService.addCollection = (object) => {
   })
   .then(res => res.json())
   .catch((err) => console.log(err))
-}
+};
 
+//adds 1 item to user's want list
 apiService.addWant = (object) => {
   return fetch(`${BASE_URL}/addWant`, {
     method: 'POST',
@@ -111,8 +115,9 @@ apiService.addWant = (object) => {
   })
   .then(res => res.json())
   .catch((err) => console.log(err))
-}
+};
 
+//finds users with trades in an area
 apiService.findTrades = (area) => {
   return fetch(`${BASE_URL}/findTrades`, {
     method: 'POST',
@@ -123,8 +128,9 @@ apiService.findTrades = (area) => {
   })
   .then(res => res.json())
   .catch((err) => console.log(err));
-}
+};
 
+//gets user info to display profile
 apiService.getUser = (userID) => {
   return fetch(`${BASE_URL}/getUser`, {
     method: 'POST',
@@ -135,8 +141,9 @@ apiService.getUser = (userID) => {
   })
   .then(res => res.json())
   .catch((err) => console.log(err));
-}
+};
 
+//sends image to server
 apiService.sendImage = (image) => {
   const fd= new FormData();
   fd.append('image', image)
@@ -146,8 +153,9 @@ apiService.sendImage = (image) => {
     },
   })
   .catch((err) => console.log(err))
-}
+};
 
+//updates user details
 apiService.updateUser = (username, value, newValue) => {
   const updateObject = {username, value, newValue}
   return fetch(`${BASE_URL}/updateUser`,{
@@ -159,8 +167,9 @@ apiService.updateUser = (username, value, newValue) => {
   })
   // .then(res => res.json())
   .catch(e => console.log(e));
-}
+};
 
+//sends a message
 apiService.sendMessage = (messageObject) => {
   return fetch(`${BASE_URL}/sendMessage`,{
     method: 'POST',
@@ -170,8 +179,9 @@ apiService.sendMessage = (messageObject) => {
     body: JSON.stringify(messageObject)
   })
   .catch(e => console.log(e));
-} 
+};
 
+//gets messages
 apiService.getMessages = (user) => {
   return fetch(`${BASE_URL}/getMessages`,{
     method: 'POST',
@@ -182,8 +192,9 @@ apiService.getMessages = (user) => {
   })
   .then(res => res.json())
   .catch(e => console.log(e));
-} 
+};
 
+//deletes messages 
 apiService.deleteMessage = (id) => {
   return fetch(`${BASE_URL}/deleteMessage` ,{
     method: 'DELETE',
@@ -194,6 +205,6 @@ apiService.deleteMessage = (id) => {
   })
   .then(res => res.json())
   .catch(e => console.log(e))
-}
+};
 
-export default apiService
+export default apiService;

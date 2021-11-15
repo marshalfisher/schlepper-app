@@ -4,8 +4,7 @@ import { changeEyedAlbum, changeViewedUser, changeOffer} from '../actions';
 import {useNavigate} from 'react-router-dom';
 import apiService from '../APIservice';
 import MessageMini from '../search-minis/message-mini/message-mini';
-
-import './messages.css'
+import './messages.css';
 
 function MessagesTab () {
     const [messages, changeMessages] = useState([]);
@@ -34,7 +33,7 @@ function MessagesTab () {
           changeMessages(messageArray);
       }
       getMessages();
-    },[])
+    },[]);
 
 
     return (
@@ -70,8 +69,8 @@ function MessagesTab () {
             </div>
             
         </div>
-    )
+    );
     
-}
+};
 
-export default MessagesTab
+export default MessagesTab;

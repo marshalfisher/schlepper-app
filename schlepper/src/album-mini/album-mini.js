@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import apiService from '../APIservice'
-import './album-mini.css'
+import { useEffect, useState } from 'react';
+import apiService from '../APIservice';
+import './album-mini.css';
 
 
 function MiniAlbum ({username, albumID, handleClick, clickValue}) {
@@ -9,7 +9,7 @@ function MiniAlbum ({username, albumID, handleClick, clickValue}) {
   const [title, setTitle] = useState("");
   const [label, setLabel] = useState("");
   const [year, setYear] = useState(0);
-  const [picURL, setPicURL] = useState("")
+  const [picURL, setPicURL] = useState("");
 
   
     //gets info on mount
@@ -20,15 +20,15 @@ function MiniAlbum ({username, albumID, handleClick, clickValue}) {
           let label;
           if (info.labels) {
             label = info.labels[0].name;
-          } else label = "Label"
+          } else label = "Label";
           setArtists(info.artists_sort);
           setTitle(info.title);
           setYear(info.year);
           setLabel(label);
-          setPicURL(info.thumb)
+          setPicURL(info.thumb);
         }
       } 
-      getInfo()
+      getInfo();
     }, [albumID])
 
     return (
@@ -42,8 +42,8 @@ function MiniAlbum ({username, albumID, handleClick, clickValue}) {
             {clickValue && <button onClick={()=> handleClick(username, albumID)}>{clickValue}</button>}
           </div>
         </div>
-    )
-}
+    );
+};
 
 
-export default MiniAlbum
+export default MiniAlbum;

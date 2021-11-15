@@ -7,4 +7,4 @@ module.exports = (sequelize, DataTypes) => {
       message: DataTypes.STRING
     })
     return Message;
-  }
+  };

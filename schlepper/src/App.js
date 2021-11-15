@@ -13,14 +13,14 @@ function App() {
   // const token = useSelector(state => state.token);
 
 
-  const [logStatus, changeLogStatus] = useState(true)
+  const [logStatus, changeLogStatus] = useState(true);
 
 
   function handleClick () {
     if (logStatus === true) {
-      changeLogStatus(false)
+      changeLogStatus(false);
     } else {
-      changeLogStatus(true)
+      changeLogStatus(true);
     }
   } 
 

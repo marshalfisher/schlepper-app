@@ -10,4 +10,4 @@ module.exports = (sequelize, DataTypes) => {
       photo: DataTypes.STRING,
     })
     return User;
-  }
+  };

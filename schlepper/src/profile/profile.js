@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import {useSelector, useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react';
+import {useSelector, useDispatch } from 'react-redux';
 import MiniAlbum from '../album-mini/album-mini';
 import apiService from '../APIservice';
 import './profile.css';
@@ -14,50 +14,49 @@ let initialData = {
 
 function Profile (username) {
      
-  const user = useSelector(state => state.user.user)
-  const [userData, changeUserData] = useState(initialData)
-  const [image, changeImage] = useState(null)
-  const [collection, changeCollection] = useState([])
-  const [wants, changeWants] = useState([])
-  const [displayedPhoto, changeDisplayedPhoto] = useState(null)
+  const user = useSelector(state => state.user.user);
+  const [userData, changeUserData] = useState(initialData);
+  const [image, changeImage] = useState(null);
+  const [collection, changeCollection] = useState([]);
+  const [wants, changeWants] = useState([]);
+  const [displayedPhoto, changeDisplayedPhoto] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
 
 
   function handleChange (e) {
-    changeImage(e.target.files[0])
-    console.log(e.target.files[0])
+    changeImage(e.target.files[0]);
   }
   
   function handleTrade (a) {
-    dispatch(changeEyedAlbum(a))
+    dispatch(changeEyedAlbum(a));
     navigate('/newMessage');
   }
 
   async function handleClick (e) {
-    e.preventDefault()
+    e.preventDefault();
     try {
-    const tag = image.name.slice(-3)
+    const tag = image.name.slice(-3);
     if (tag === 'png' || tag === 'jpg' || tag === 'gif') {
-      await apiService.sendImage(image)
-      await apiService.updateUser(user, 'photo', image.name)
-      changeDisplayedPhoto(image.name)
+      await apiService.sendImage(image);
+      await apiService.updateUser(user, 'photo', image.name);
+      changeDisplayedPhoto(image.name);
     } else alert('image format not supported');
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   }
 
   useEffect(() => {
     async function getUserInfo () {
         const resUserData = await apiService.getUser(username);
-        changeUserData(resUserData)
-        changeCollection(JSON.parse(resUserData.collection))
-        changeWants(JSON.parse(resUserData.wants))
-        changeDisplayedPhoto(resUserData.photo)
+        changeUserData(resUserData);
+        changeCollection(JSON.parse(resUserData.collection));
+        changeWants(JSON.parse(resUserData.wants));
+        changeDisplayedPhoto(resUserData.photo);
     }  
-    getUserInfo ()
+    getUserInfo ();
   }, [username])
 
   return (
@@ -92,7 +91,7 @@ function Profile (username) {
       </div>
       
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

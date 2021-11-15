@@ -24,4 +24,4 @@ function UserMini ({u}) {
     );
 };
 
-export default UserMini
+export default UserMini;

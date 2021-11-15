@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import MiniAlbum from '../../album-mini/album-mini';
-import './new-message.css'
+import './new-message.css';
 import apiService from '../../APIservice';
 
 function NewMessage () {
@@ -11,7 +11,7 @@ function NewMessage () {
     const collection = useSelector(state => state.collection.collection);
     const [offeredAlbum, changeOfferedAlbum] = useState('');
     const [message, changeMessage] = useState('');
-    const [status, changeStatus] = useState(0)
+    const [status, changeStatus] = useState(0);
 
     function handleChange(e) {
         const message = e.target.value;
@@ -62,6 +62,6 @@ function NewMessage () {
              }
         </div>
     )
-}
+};
 
 export default NewMessage;

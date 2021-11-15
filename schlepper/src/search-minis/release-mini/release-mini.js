@@ -1,19 +1,19 @@
 import apiService from "../../APIservice";
-import {useSelector, useDispatch, } from 'react-redux'
-import {changeCollection, changeWants} from '../../actions'
+import {useSelector, useDispatch, } from 'react-redux';
+import {changeCollection, changeWants} from '../../actions';
 
 function ReleaseMini ({r}) {
-    const username = useSelector(state => state.user.user)
-    const dispatch = useDispatch()
+    const username = useSelector(state => state.user.user);
+    const dispatch = useDispatch();
 
     async function handleCollectionClick () {
       const res = await apiService.addCollection({ username, album: r.id });
-      dispatch(changeCollection(res))
+      dispatch(changeCollection(res));
     }
 
     async function handleWantClick () {
       const res = await apiService.addWant({ username, album: r.id });
-      dispatch(changeWants(res))
+      dispatch(changeWants(res));
     }
 
     return (
@@ -28,7 +28,7 @@ function ReleaseMini ({r}) {
           <button onClick={handleWantClick}>Add to Wants</button>
         </div>
       </div>
-      )
-}
+      );
+};
 
-export default ReleaseMini
+export default ReleaseMini;

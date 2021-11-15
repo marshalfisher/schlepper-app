@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const router = require('./router');
-const fileUpload = require('express-fileupload')
+const fileUpload = require('express-fileupload');
 
 const port = 3001;
 
@@ -13,7 +13,7 @@ const corsConfig = {
   
 app.use(cors(corsConfig));
 app.use(express.json());
-app.use(fileUpload())
+app.use(fileUpload());
 app.use(router);
 app.get('*', (req, res) => {
   res.status(404).send('Page Not Found');

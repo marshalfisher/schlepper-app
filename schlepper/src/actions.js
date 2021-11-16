@@ -1,3 +1,4 @@
+
 export const authTrue = () => {
   return {type: 'AUTH_TRUE'};
 };
@@ -33,3 +34,7 @@ export const changeEyedAlbum = (album) => {
 export const changeOffer = (album) => {
   return {type: 'CHANGE_OFFER', album}
 };
+
+export const logOut = () => {
+  return {type: "LOG_OUT"}
+}

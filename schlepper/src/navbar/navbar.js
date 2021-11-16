@@ -1,10 +1,16 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logOut } from '../actions';
 import { Link } from 'react-router-dom';
 import './navbar.css';
 
 const Navbar = () => {
   const auth = useSelector(state => state.auth.auth);
+  const dispatch = useDispatch();
+
+  function handleClick () {
+    dispatch(logOut())
+  }
 
   const style = {
     textDecoration: 'none',
@@ -21,7 +27,13 @@ const Navbar = () => {
       <Link to='/messages' style={style}>Messages |</Link>
       <Link to='/trades'style={style}>Browse Trades |</Link>
       <Link to='/search'style={style}>Search |</Link>
-      <Link to='/profile' style={style}>Profle</Link>
+      <Link to='/profile' style={style}>Profle |</Link>
+      <Link to='/' style={style}  onClick={handleClick}>
+        {/* <button onClick={handleClick}>Log Out</button> 
+            make the link a button to make it more noticable 
+        */}
+        Log Out
+      </Link>
       </div>
       }
     </div>

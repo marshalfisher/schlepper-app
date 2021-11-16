@@ -11,9 +11,12 @@ const {login,
     getUser,
     sendImage,
     updateUser,
-    sendMessage,
-    getMessages,
 } = require('./controller/userController');
+
+const {sendMessage,
+    getMessages,
+    deleteMessage,
+} = require ('./controller/messageController')
 
 router.post('/login', login);
 router.post('/new', addUser);
@@ -27,6 +30,7 @@ router.post('/sendImage', sendImage);
 router.post('/updateUser', updateUser);
 router.post('/sendMessage', sendMessage);
 router.post('/getMessages', getMessages);
+router.delete('/deleteMessage', deleteMessage)
 router.delete('/deleteCollection', deleteCollection);
 router.delete('/deleteWant', deleteWant);
 

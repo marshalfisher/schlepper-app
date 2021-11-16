@@ -218,28 +218,6 @@ async function updateUser (req, res) {
     res.status(500)
   }
 };
-async function sendMessage (req, res) {
-  try {
-    const NewMessage = await db.Message.create(req.body)
-    if (NewMessage) {
-      res.status(201).send('Message Sent')
-    } else res.status(401).send('Invalid Message') // i'l figure this out later
-  } catch (e) {
-    console.log(e);
-    res.status(500)
-  }
-};
-
-async function getMessages (req, res) {
-  try {
-    const {user} = req.body;
-    const messages = await db.Message.findAll( { where: {[Op.or] : [{toUser: user}, {fromUser: user}] } } )
-    res.status(200).send(JSON.stringify(messages))
-  } catch (e) {
-    console.log(e);
-    res.status(500)
-  }
-};
 
 module.exports = {
   login,
@@ -254,6 +232,4 @@ module.exports = {
   getUser,
   sendImage,
   updateUser,
-  sendMessage,
-  getMessages,
 };

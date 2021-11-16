@@ -7,8 +7,8 @@
   border: 3px solid aquamarine;
   padding: 5px;
   width: 400px;
-  height: 100px;
-  line-height: 40%;
+  max-height: 200px;
+  /* line-height: 40%; */
 }
 
 

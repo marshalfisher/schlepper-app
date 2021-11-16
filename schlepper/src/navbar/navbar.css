@@ -17,3 +17,18 @@ h3 {
     display: flex;
     justify-content: space-evenly;
 }
+
+.navbar button {
+    position: relative;
+    font-size: 100%;
+    font-family: 'Courier New', Courier, monospace;
+    margin: auto;
+    bottom: 5px;
+    background-color: thistle;
+}
+
+.logout {
+    text-decoration: 'none';
+    color: 'white';
+    margin-left: '20px';
+}

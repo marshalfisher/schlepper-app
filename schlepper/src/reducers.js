@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import storage from 'redux-persist/lib/storage'
 
 //reducer to authenticate
 const auth = (state = false, action) => {
@@ -102,8 +103,9 @@ const offer = (state = '', action) => {
   }
 }
 
+
 // Combining both reducers
-const reducers = combineReducers({
+const appReducer = combineReducers({
   auth,
   user,
   token,
@@ -113,5 +115,16 @@ const reducers = combineReducers({
   eyedAlbum,
   offer,
 });
+
+const reducers = (state, action) => {
+  if (action.type === 'LOG_OUT') {
+
+    //storage.removeItem('persist:root')
+
+    return appReducer(undefined, action)
+  }
+
+  return appReducer(state, action)
+}
 
 export default reducers;

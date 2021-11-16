@@ -8,6 +8,7 @@ import './messages.css';
 
 function MessagesTab () {
     const [messages, changeMessages] = useState([]);
+    const [response, changeResponse] = useState({})
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -22,8 +23,10 @@ function MessagesTab () {
       };
 
     async function handleDelete (m) {
-        const response = await apiService.deleteMessage(m.id);
-        if (response) console.log(response);
+      await apiService.deleteMessage(m.id);
+      const messageArray =  await apiService.getMessages(user);
+        messageArray.sort(a => a.id);
+        changeMessages(messageArray);
     };
 
     useEffect(() => {
@@ -33,7 +36,7 @@ function MessagesTab () {
           changeMessages(messageArray);
       }
       getMessages();
-    },[]);
+    },[response]);
 
 
     return (

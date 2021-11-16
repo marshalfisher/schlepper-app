@@ -6,13 +6,30 @@ import './index.css'
 import { createStore } from 'redux';
 import reducers from './reducers';
 import { Provider } from 'react-redux';
+import { persistStore, persistReducer } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react';
+import storage from 'redux-persist/lib/storage'
 
-let store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ &&
-  window.__REDUX_DEVTOOLS_EXTENSION__());
+const persistConfig = {
+key: 'root',
+storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, reducers);
+
+//original store incase persist library need to be swapped out or anything idk
+// let store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ &&
+//   window.__REDUX_DEVTOOLS_EXTENSION__());
+
+let store = createStore(persistedReducer);
+let persistor = persistStore(store);
+
 
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>,
     document.getElementById('root')
   );

@@ -207,4 +207,46 @@ apiService.deleteMessage = (id) => {
   .catch(e => console.log(e))
 };
 
+//gets users's trades
+apiService.getTrades = (user) => {
+  //user
+  return fetch(`${BASE_URL}/getTrades` , {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({user})
+  })
+  .then(res => res.json())
+  .catch(err => console.log(err))
+};
+
+//adds trade to database
+apiService.makeTrade = (object) => {
+  //user1, user2, offer1, offer2, location, additional
+  return fetch(`${BASE_URL}/makeTrade`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(object)
+  })
+  .then(res => res.json())
+  .catch(err => console.log(err))
+};
+
+//deletes trade from database 
+apiService.deleteTrade = (id) => {
+  //id
+  return fetch(`${BASE_URL}/deleteTrade`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({id})
+  })
+  .then(res => res.json())
+  .catch(err => console.log(err))
+};
+
 export default apiService;

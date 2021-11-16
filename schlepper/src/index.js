@@ -10,19 +10,20 @@ import { persistStore, persistReducer } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react';
 import storage from 'redux-persist/lib/storage'
 
+
+//stuff for redux-persist to keep user logged in after page refresh
 const persistConfig = {
 key: 'root',
 storage,
 };
-
 const persistedReducer = persistReducer(persistConfig, reducers);
+let store = createStore(persistedReducer);
+let persistor = persistStore(store);
 
-//original store incase persist library need to be swapped out or anything idk
+//original store incase persist library need to be swapped out or anything
 // let store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ &&
 //   window.__REDUX_DEVTOOLS_EXTENSION__());
 
-let store = createStore(persistedReducer);
-let persistor = persistStore(store);
 
 
   ReactDOM.render(

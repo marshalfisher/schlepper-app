@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import storage from 'redux-persist/lib/storage'
 
 //reducer to authenticate
 const auth = (state = false, action) => {
@@ -19,66 +18,72 @@ const auth = (state = false, action) => {
   }
 };
 
+//sets user
 const user = (state = '', action) =>{
   switch (action.type) {
     case 'CHANGE_USER':{
-            return {
-                ...state,
-                user: action.text,
-            }
+        return {
+          ...state,
+          user: action.text,
         }
-        default : return state;
-    } 
-}
+      }
+      default : return state;
+  } 
+};
 
+//changes token
 const token = (state = '', action) =>{
   switch (action.type) {
     case 'CHANGE_TOKEN':{
-            return {
-                ...state,
-                token: action.text,
-            }
+        return {
+          ...state,
+          token: action.text,
         }
-        default : return state;
-    } 
-}
+      }
+      default : return state;
+  } 
+};
 
+//changes collection
 const collection = (state = [], action) =>{
   switch (action.type) {
     case 'CHANGE_COLLECTION':{
-            return {
-                ...state,
-                collection: [...action.array],
-            }
+        return {
+          ...state,
+          collection: [...action.array],
         }
-        default : return state;
-    } 
-}
+      }
+      default : return state;
+  } 
+};
 
+// changes wants 
 const wants = (state = [], action) =>{
   switch (action.type) {
     case 'CHANGE_WANTS':{
-            return {
-                ...state,
-                wants: [...action.array],
-            }
+        return {
+          ...state,
+          wants: [...action.array],
         }
-        default : return state;
-    } 
-}
+      }
+      default : return state;
+  } 
+};
 
+//sets user for communication purposes 
 const viewedUser = (state = '', action) => {
   switch (action.type) {
     case 'CHANGE_VIEWED_USER':{
-            return {
-                ...state,
-                viewedUser: action.username,
-            }
+        return {
+          ...state,
+          viewedUser: action.username,
         }
-        default : return state;
-    } 
-}
+      }
+      default : return state;
+  } 
+};
 
+//sets album for communication purposes
 const eyedAlbum = (state = '', action) => {
   switch(action.type) {
     case 'CHANGE_EYED_ALBUM' : {
@@ -89,8 +94,9 @@ const eyedAlbum = (state = '', action) => {
     }
     default : return state;
   }
-}
+};
 
+//sets album offered in trade (for message)
 const offer = (state = '', action) => {
   switch(action.type) {
     case 'CHANGE_OFFER' : {
@@ -101,7 +107,7 @@ const offer = (state = '', action) => {
     }
     default : return state;
   }
-}
+};
 
 
 // Combining both reducers
@@ -116,15 +122,13 @@ const appReducer = combineReducers({
   offer,
 });
 
+//extra code here to handle log out 
 const reducers = (state, action) => {
   if (action.type === 'LOG_OUT') {
-
     //storage.removeItem('persist:root')
-
     return appReducer(undefined, action)
   }
-
   return appReducer(state, action)
-}
+};
 
 export default reducers;

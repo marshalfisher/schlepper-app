@@ -2,12 +2,22 @@ import { useEffect, useState,  } from 'react';
 import apiService from '../../APIservice';
 import './message-mini.css';
 
-function MessageMini ({fromUser, toUser, album, offeredAlbum, message, sent, handleClick, handleDelete}) {
+function MessageMini ({fromUser,
+  toUser,
+  album,
+  offeredAlbum,
+  message,
+  sent,
+  handleClick,
+  handleDelete,
+  handleTrade}) {
 
+  //state
   const [albumInfo, changeAlbumInfo] = useState({});
   const [offeredAlbumInfo, changeOfferedAlbumInfo] = useState({});
   
   useEffect (()=> {
+    //gets album info for message on mount
     async function getInfo () {
       const info =  await apiService.getAlbumInfo(album)
       if (info) {
@@ -41,8 +51,9 @@ function MessageMini ({fromUser, toUser, album, offeredAlbum, message, sent, han
         <p>For: {offeredAlbumInfo.title}</p>
         {message && <p> Message: {message}</p>}
         {!sent && <div>
-          <button onClick={handleDelete}>Delete</button>
+          <button onClick={handleTrade}>Trade</button>
           <button onClick={handleClick}>Reply</button>
+          <button onClick={handleDelete}>Delete</button>
           </div>
         }
       </div>

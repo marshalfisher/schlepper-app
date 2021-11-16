@@ -42,6 +42,13 @@ button:hover {
   left: -10px;
 }
 
+.face img {
+  position: fixed;
+  height:800px;
+  margin-left: 10px
+}
+/* 
+
 .eye{
   margin: 100px;
   background-color: black;
@@ -80,4 +87,4 @@ button:hover {
   border-radius: 4px;
   width: 40px;
   height: 40px;
-}
+}  */

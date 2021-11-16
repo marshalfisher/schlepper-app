@@ -1,0 +1,25 @@
+.mini {
+    width: 500px;
+}
+
+.trade-info {
+    display: flex;
+    justify-content: space-around;
+}
+
+.user1 {
+    margin-right: 65px;
+    margin-left: 2px;
+    text-align: left;
+}
+
+.user2 {
+  margin-left: 65px;
+  margin-right: 2px;
+  text-align: right;
+}
+
+.lower-info {
+    text-align: center;
+    margin-bottom: 50px;
+}

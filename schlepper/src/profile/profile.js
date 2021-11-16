@@ -13,27 +13,31 @@ let initialData = {
 };
 
 function Profile (username) {
-     
-  const user = useSelector(state => state.user.user);
+  
+  //state
   const [userData, changeUserData] = useState(initialData);
   const [image, changeImage] = useState(null);
   const [collection, changeCollection] = useState([]);
   const [wants, changeWants] = useState([]);
   const [displayedPhoto, changeDisplayedPhoto] = useState(null);
+  
+  //redux
+  const user = useSelector(state => state.user.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
 
-
+  //sets image to state
   function handleChange (e) {
     changeImage(e.target.files[0]);
   }
   
+  //sends a message to the user
   function handleTrade (a) {
     dispatch(changeEyedAlbum(a));
     navigate('/newMessage');
   }
 
+  //set image as new profile image and save it to /public/uploads folder
   async function handleClick (e) {
     e.preventDefault();
     try {
@@ -48,20 +52,20 @@ function Profile (username) {
     }
   }
 
+  //gets user info on mount
   useEffect(() => {
     async function getUserInfo () {
-        const resUserData = await apiService.getUser(username);
-        changeUserData(resUserData);
-        changeCollection(JSON.parse(resUserData.collection));
-        changeWants(JSON.parse(resUserData.wants));
-        changeDisplayedPhoto(resUserData.photo);
+      const resUserData = await apiService.getUser(username);
+      changeUserData(resUserData);
+      changeCollection(JSON.parse(resUserData.collection));
+      changeWants(JSON.parse(resUserData.wants));
+      changeDisplayedPhoto(resUserData.photo);
     }  
     getUserInfo ();
   }, [username])
 
   return (
-      <div className="profile">
-  
+    <div className="profile">
       <img src={`/uploads/${displayedPhoto}`} alt="profile"/>
       {user == username.username &&
       <div>
@@ -88,8 +92,7 @@ function Profile (username) {
             username={username}
             />)}
          </div>
-      </div>
-      
+      </div> 
     </div>
   );
 };

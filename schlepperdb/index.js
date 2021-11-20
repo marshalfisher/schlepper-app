@@ -3,12 +3,13 @@ const cors = require('cors');
 const app = express();
 const router = require('./router');
 const fileUpload = require('express-fileupload');
+const db = require('./models');
 
 const port = 3001;
 
 const corsConfig = {
-    origin: 'http://localhost:3000',
-    credentials: true,
+  origin: 'http://localhost:3000',
+  credentials: true,
 };
 
 app.use(cors(corsConfig));
@@ -19,11 +20,13 @@ app.get('*', (req, res) => {
   res.status(404).send('Page Not Found');
 });
 
-app.listen(port, (e) => {
+(async () => {
+  await db.sequelize.sync();
+  app.listen(port, e => {
     if (e) {
       console.log(e);
     } else {
       console.log(`Listening on http://localhost:${port}`);
     }
   });
-  
+})();

@@ -19,11 +19,15 @@ app.get('*', (req, res) => {
   res.status(404).send('Page Not Found');
 });
 
-app.listen(port, (e) => {
+(async () => {
+  await db.sequelize.sync();
+  app.listen(port, e => {
     if (e) {
       console.log(e);
     } else {
       console.log(`Listening on http://localhost:${port}`);
     }
   });
-  
+})();
+
+module.exports = app;

@@ -81,10 +81,7 @@ const wants = (state = [], action) => {
 const viewedUser = (state = '', action) => {
   switch (action.type) {
     case 'CHANGE_VIEWED_USER': {
-      return {
-        ...state,
-        viewedUser: action.username,
-      };
+      return { ...state, viewedUser: action.username };
     }
     default:
       return state;
@@ -95,10 +92,7 @@ const viewedUser = (state = '', action) => {
 const eyedAlbum = (state = '', action) => {
   switch (action.type) {
     case 'CHANGE_EYED_ALBUM': {
-      return {
-        ...state,
-        eyedAlbum: action.album,
-      };
+      return { ...state, eyedAlbum: action.album };
     }
     default:
       return state;
@@ -109,10 +103,7 @@ const eyedAlbum = (state = '', action) => {
 const offer = (state = '', action) => {
   switch (action.type) {
     case 'CHANGE_OFFER': {
-      return {
-        ...state,
-        offer: action.album,
-      };
+      return { ...state, offer: action.album };
     }
     default:
       return state;

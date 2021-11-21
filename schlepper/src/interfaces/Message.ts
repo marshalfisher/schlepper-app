@@ -4,4 +4,5 @@ export interface Message {
   album: string;
   offeredAlbum: string;
   message: string;
+  id: string;
 }

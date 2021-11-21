@@ -1,6 +1,6 @@
 import './user-mini.css';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../../redux/hooks';
 import { changeViewedUser } from '../../../redux/actions';
 import { User } from '../../../interfaces/User';
 
@@ -10,10 +10,10 @@ interface Props {
 
 const UserMini: React.FC<Props> = ({ user }) => {
   //redux
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   //store selected user in redux
-  function handleClick() {
+  function handleClick(): void {
     dispatch(changeViewedUser(user.username));
   }
 

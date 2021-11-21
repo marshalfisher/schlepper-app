@@ -16,7 +16,7 @@ const TradeMini: React.FC<Props> = ({ tradeInfo, handleClick }) => {
 
   //gets album information on mount
   useEffect(() => {
-    async function getInfo() {
+    async function getInfo(): Promise<void> {
       const info1 = await apiService.getAlbumInfo(tradeInfo.user1offer);
       const info2 = await apiService.getAlbumInfo(tradeInfo.user2offer);
       changeAlbum1(info1);

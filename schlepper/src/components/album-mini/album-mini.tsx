@@ -3,23 +3,23 @@ import apiService from '../../APIservice';
 import './album-mini.css';
 
 interface Props {
-  username: string;
+  username?: any;
   albumID: string;
-  handleClick: (username: string, albumID: string) => void;
-  clickValue: boolean;
+  handleClick?: (username: string, albumID: string) => void;
+  clickValue?: string | undefined;
 }
 
 const MiniAlbum: React.FC<Props> = ({ username, albumID, handleClick, clickValue }) => {
   //state
-  const [artists, setArtists] = useState([]);
-  const [title, setTitle] = useState('');
-  const [label, setLabel] = useState('');
-  const [year, setYear] = useState(0);
-  const [picURL, setPicURL] = useState('');
+  const [artists, setArtists] = useState<string[]>([]);
+  const [title, setTitle] = useState<string>('');
+  const [label, setLabel] = useState<string>('');
+  const [year, setYear] = useState<number>(0);
+  const [picURL, setPicURL] = useState<string>('');
 
   //gets info on mount
   useEffect(() => {
-    async function getInfo() {
+    async function getInfo(): Promise<void> {
       const info = await apiService.getAlbumInfo(albumID);
       if (info) {
         let label;
@@ -44,7 +44,7 @@ const MiniAlbum: React.FC<Props> = ({ username, albumID, handleClick, clickValue
         <p>{artists ? artists : 'Artist'}</p>
         <p>{label ? label : 'Label'}</p>
         <p>{year ? year : 'Year'}</p>
-        {clickValue && (
+        {clickValue && handleClick && (
           <button onClick={() => handleClick(username, albumID)}>{clickValue}</button>
         )}
       </div>

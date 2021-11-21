@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 import apiService from '../../../APIservice';
 import './message-mini.css';
+import { Album } from '../../../interfaces/Album';
 
 interface Props {
-  fromUser: string;
-  toUser: string;
+  fromUser?: string;
+  toUser?: string;
   album: string;
   offeredAlbum: string;
   message: string;
-  sent: boolean;
-  handleClick: () => void;
-  handleDelete: () => void;
-  handleTrade: () => void;
+  sent?: boolean;
+  handleClick?: () => void;
+  handleDelete?: () => void;
+  handleTrade?: () => void;
 }
 
 const MessageMini: React.FC<Props> = ({
@@ -27,12 +28,12 @@ const MessageMini: React.FC<Props> = ({
 }) => {
   //state
   const initialState = { title: '', artist: '', picURL: '' };
-  const [albumInfo, changeAlbumInfo] = useState(initialState);
-  const [offeredAlbumInfo, changeOfferedAlbumInfo] = useState(initialState);
+  const [albumInfo, changeAlbumInfo] = useState<Album>(initialState);
+  const [offeredAlbumInfo, changeOfferedAlbumInfo] = useState<Album>(initialState);
 
   useEffect(() => {
     //gets album info for message on mount
-    async function getInfo() {
+    async function getInfo(): Promise<void> {
       const info = await apiService.getAlbumInfo(album);
       if (info) {
         changeAlbumInfo({
@@ -41,7 +42,6 @@ const MessageMini: React.FC<Props> = ({
           picURL: info.thumb,
         });
       }
-
       const offeredInfo = await apiService.getAlbumInfo(offeredAlbum);
       if (offeredInfo) {
         changeOfferedAlbumInfo({

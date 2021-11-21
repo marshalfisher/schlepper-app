@@ -1,6 +1,6 @@
 import apiService from '../../APIservice';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../redux/hooks';
 import './create-user.css';
 import { User } from '../../interfaces/User';
 import { authTrue, changeUser, changeCollection, changeWants } from '../../redux/actions';
@@ -18,7 +18,7 @@ function CreateUser() {
   const [state, setState] = useState<User>(initialState);
 
   //reduc
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   // tracks user inputs and stores them to state
   const handleChange = (
@@ -85,7 +85,6 @@ function CreateUser() {
             value={state.city}
             onChange={handleChange}
           />
-          {/* long list lmfao */}
           <label>Select State:</label>
           <select id='state' name='state' onChange={handleChange}>
             <option value='al'>Alabama</option>

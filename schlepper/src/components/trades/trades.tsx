@@ -6,7 +6,7 @@ import { User } from '../../interfaces/User';
 
 const TradesTab: React.FC = () => {
   //state
-  const [area, changeArea] = useState('');
+  const [area, changeArea] = useState<string>('');
   const [users, changeUsers] = useState<User[]>([]);
 
   //sets location after picked
@@ -16,7 +16,7 @@ const TradesTab: React.FC = () => {
 
   //gets users from database after location is picked
   useEffect(() => {
-    async function findTrades() {
+    async function findTrades(): Promise<void> {
       const res = await apiService.findTrades(area);
       changeUsers(res);
     }

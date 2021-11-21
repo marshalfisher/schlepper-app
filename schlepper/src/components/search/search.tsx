@@ -6,7 +6,7 @@ import { Album } from '../../interfaces/Album';
 
 const Search: React.FC = () => {
   //state
-  const [searchQuery, changeSearchQuery] = useState('');
+  const [searchQuery, changeSearchQuery] = useState<string>('');
   const [results, changeResults] = useState<Album[]>([]);
 
   //tracks search query
@@ -16,7 +16,7 @@ const Search: React.FC = () => {
   }
 
   //sends api call to db
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
     const res = await apiService.search(searchQuery, 'release');
     if (res) {

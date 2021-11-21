@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './login.css';
 import apiService from '../../APIservice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../redux/hooks';
 import { User } from '../../interfaces/User';
 import { authTrue, changeUser, changeCollection, changeWants } from '../../redux/actions';
 
@@ -15,7 +15,7 @@ const Login: React.FC = () => {
   const [state, setState] = useState<User>(initialState);
 
   //redux
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   //tracks inputs in login form
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -29,8 +29,9 @@ const Login: React.FC = () => {
   };
 
   //sets user data in redux upon successful log in
-  async function logAttempt(userObject: User) {
+  async function logAttempt(userObject: User): Promise<void> {
     const response = await apiService.login(userObject);
+    // const { username } = userObject;
     if (response.confirmed) {
       const { accessToken, collection, wants } = response;
       localStorage.setItem('accessToken', accessToken);

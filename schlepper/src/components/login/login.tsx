@@ -6,8 +6,9 @@ import { User } from '../../interfaces/User';
 import { authTrue, changeUser, changeCollection, changeWants } from '../../redux/actions';
 
 const initialState = {
-  username: '',
+  email: '',
   password: '',
+  username: '',
 };
 
 const Login: React.FC = () => {
@@ -35,7 +36,7 @@ const Login: React.FC = () => {
     if (response.confirmed) {
       const { accessToken, collection, wants } = response;
       localStorage.setItem('accessToken', accessToken);
-      dispatch(changeUser(userObject.username));
+      dispatch(changeUser(userObject.email));
       dispatch(changeCollection(JSON.parse(collection)));
       dispatch(changeWants(JSON.parse(wants)));
       dispatch(authTrue());
@@ -54,10 +55,10 @@ const Login: React.FC = () => {
           }}
         >
           <input
-            type='username'
-            placeholder='Username'
-            name='username'
-            value={state.username}
+            type='email'
+            placeholder='Email'
+            name='email'
+            value={state.email}
             onChange={handleChange}
           />
           <input

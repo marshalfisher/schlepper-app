@@ -11,18 +11,20 @@ const SECRET_KEY = 'B-)';
 
 async function login(req, res) {
   try {
-    const { username, password } = req.body;
-    const match = await db.User.findOne({ where: { username: `${username}` } });
-    const validatedUser = await bcrypt.compare(password, match.password);
+    const { email, password } = req.body;
+    const user = await db.User.findOne({ where: { email: `${email}` } });
+    if (!user)
+      return res.status(409).send({ error: '409', message: 'Invalid credentials' });
+    const validatedUser = await bcrypt.compare(password, user.password);
     if (validatedUser) {
-      console.log('validated user: ' + match.id);
-      const accessToken = jwt.sign({ _id: match.id }, SECRET_KEY);
+      console.log('validated user: ' + user.id);
+      const accessToken = jwt.sign({ _id: user.id }, SECRET_KEY);
 
       res.status(200).send({
         confirmed: true,
         accessToken,
-        collection: match.collection,
-        wants: match.wants,
+        collection: user.collection,
+        wants: user.wants,
       });
     } else res.status(400).send({ confirmed: false });
   } catch (e) {

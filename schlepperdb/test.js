@@ -1,7 +1,8 @@
 const supertest = require('supertest');
 const assert = require('assert');
 const app = require('./index');
-
+const sinon = require('sinon');
+//https://sinonjs.org/ for mocking
 //User Controller
 describe("POST /login", function(){
   it('it should return status code 200 if account exists', function(done){
@@ -55,13 +56,13 @@ describe("POST /new", function(){
   });
 });
 
-/*describe("POST /addCollection", function(){
+describe("POST /addCollection", function(){
   it('should return status code 200 if collection is added successfully', function(){
     supertest(app)
     .post('/addCollection')
     .send({})
-  })
-})    need to work out what to send for collection*/
+  });
+});
 
 /*describe("POST /addCollection", function(){
   it('should return status code 500 if collection is not successfully', function(){

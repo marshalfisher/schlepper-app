@@ -19,6 +19,7 @@ const auth = (state: boolean = false, action: AnyAction) => {
 };
 
 //sets user
+
 const user = (state: string = '', action: AnyAction) => {
   switch (action.type) {
     case 'CHANGE_USER': {

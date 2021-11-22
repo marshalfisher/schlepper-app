@@ -32,11 +32,10 @@ const Login: React.FC = () => {
   //sets user data in redux upon successful log in
   async function logAttempt(userObject: User): Promise<void> {
     const response = await apiService.login(userObject);
-    // const { username } = userObject;
     if (response.confirmed) {
       const { accessToken, collection, wants } = response;
       localStorage.setItem('accessToken', accessToken);
-      dispatch(changeUser(userObject.email));
+      dispatch(changeUser(userObject.username));
       dispatch(changeCollection(JSON.parse(collection)));
       dispatch(changeWants(JSON.parse(wants)));
       dispatch(authTrue());
@@ -55,10 +54,10 @@ const Login: React.FC = () => {
           }}
         >
           <input
-            type='email'
-            placeholder='Email'
-            name='email'
-            value={state.email}
+            type='username'
+            placeholder='username'
+            name='username'
+            value={state.username}
             onChange={handleChange}
           />
           <input

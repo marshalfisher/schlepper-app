@@ -24,6 +24,8 @@ const MessagesTab: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  console.log(user);
+
   //changes 'trade' message
   function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>): void {
     const message = e.target.value;

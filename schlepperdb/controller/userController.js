@@ -11,8 +11,8 @@ const SECRET_KEY = 'B-)';
 
 async function login(req, res) {
   try {
-    const { email, password } = req.body;
-    const user = await db.User.findOne({ where: { email: `${email}` } });
+    const { username, password } = req.body;
+    const user = await db.User.findOne({ where: { username: `${username}` } });
     if (!user)
       return res.status(409).send({ error: '409', message: 'Invalid credentials' });
     const validatedUser = await bcrypt.compare(password, user.password);

@@ -27,20 +27,13 @@ const MessagesTab: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  //changes 'trade' message
-  function handleChangeDate(e: React.ChangeEvent<HTMLInputElement>): void {
-    setDate(e.target.value);
-  }
-
-  //changes 'trade' location
-  function handleChangeLocation(e: React.ChangeEvent<HTMLInputElement>): void {
-    setLocation(e.target.value);
-  }
+  const handleChange = (value: string, setter: (value: string) => void) => {
+    setter(value);
+  };
 
   //navigates to 'reply'
   function handleClick(message: Message): void {
     dispatch(changeViewedUser(message.fromUser));
-    message;
     dispatch(changeEyedAlbum(message.album));
     dispatch(changeOffer(message.offeredAlbum));
     navigate('/reply');
@@ -81,16 +74,13 @@ const MessagesTab: React.FC = () => {
     changeTradeStatus(true);
   }
 
-  const CLIENT_ID =
-    '965467492625-84q4gf85n21mso8kd0uvadfulvd98q0k.apps.googleusercontent.com';
-  const API_KEY = 'AIzaSyCjDWzfOwgx9rbZDHj0cQ4Cnc3JoEpMKeQ';
-
   // Ad event to Google Calendat
   const addEventToCalendar = (email: string) => {
     gapi.load('client:auth2', () => {
       gapi.client.init({
-        apiKey: API_KEY,
-        clientId: CLIENT_ID,
+        apiKey: 'AIzaSyCjDWzfOwgx9rbZDHj0cQ4Cnc3JoEpMKeQ',
+        clientId:
+          '965467492625-84q4gf85n21mso8kd0uvadfulvd98q0k.apps.googleusercontent.com',
         discoveryDocs: 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest',
         scope: 'https://www.googleapis.com/auth/calendar.events',
       });
@@ -101,7 +91,7 @@ const MessagesTab: React.FC = () => {
         .then(() => {
           var event = {
             summary: 'Trade Event!',
-            location: 'Rua Manuel Jacinto, 932',
+            location: location,
             description: 'This is a trading event created on Schlepper',
             start: {
               dateTime: moment(date).toISOString(true),
@@ -155,11 +145,19 @@ const MessagesTab: React.FC = () => {
             Trade between {tradeInfo.fromUser} & {tradeInfo.toUser}
           </h2>
           <h2>Trading: </h2>
-          {albumInfo1 && <h3>{albumInfo1.title}</h3>}
-          {albumInfo1 && <img src={albumInfo1.thumb} />}
+          {albumInfo1 && (
+            <>
+              <h3>{albumInfo1.title}</h3>
+              <img src={albumInfo1.thumb} />
+            </>
+          )}
           <h2>For: </h2>
-          {albumInfo2 && <h3>{albumInfo2.title}</h3>}
-          {albumInfo2 && <img src={albumInfo2.thumb} />}
+          {albumInfo2 && (
+            <>
+              <h3>{albumInfo2.title}</h3>
+              <img src={albumInfo2.thumb} />
+            </>
+          )}
           <form onSubmit={handleSubmit}>
             <h2>Location:</h2>
             <input
@@ -168,7 +166,7 @@ const MessagesTab: React.FC = () => {
               name='message'
               className='info-input--location'
               value={location}
-              onChange={handleChangeLocation}
+              onChange={e => handleChange(e.target.value, setLocation)}
             />
             <h3>Date and time:</h3>
             <input
@@ -177,7 +175,7 @@ const MessagesTab: React.FC = () => {
               name='date'
               className='info-input--date'
               value={date}
-              onChange={handleChangeDate}
+              onChange={e => handleChange(e.target.value, setDate)}
             />
             <input type='submit' value='Send Trade' className='button' />
           </form>

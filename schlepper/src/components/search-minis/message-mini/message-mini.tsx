@@ -28,31 +28,30 @@ const MessageMini: React.FC<Props> = ({
 }) => {
   //state
   const initialState = { title: '', artist: '', picURL: '' };
-  const [albumInfo, changeAlbumInfo] = useState<Album>(initialState);
-  const [offeredAlbumInfo, changeOfferedAlbumInfo] = useState<Album>(initialState);
+  const [albumInfo, setAlbumInfo] = useState<Album>(initialState);
+  const [offeredAlbumInfo, setOfferedAlbumInfo] = useState<Album>(initialState);
 
   useEffect(() => {
-    //gets album info for message on mount
-    async function getInfo(): Promise<void> {
+    async function getAlbumInfo(): Promise<void> {
       const info = await apiService.getAlbumInfo(album);
       if (info) {
-        changeAlbumInfo({
+        setAlbumInfo({
           title: info.title,
           artist: info.artists_sort,
           picURL: info.thumb,
         });
       }
-      const offeredInfo = await apiService.getAlbumInfo(offeredAlbum);
-      if (offeredInfo) {
-        changeOfferedAlbumInfo({
-          title: offeredInfo.title,
-          artist: offeredInfo.artists_sort,
-          picURL: offeredInfo.thumb,
+      const offeredAlbumInfo = await apiService.getAlbumInfo(offeredAlbum);
+      if (offeredAlbumInfo) {
+        setOfferedAlbumInfo({
+          title: offeredAlbumInfo.title,
+          artist: offeredAlbumInfo.artists_sort,
+          picURL: offeredAlbumInfo.thumb,
         });
       }
     }
 
-    getInfo();
+    getAlbumInfo();
   }, []);
 
   return (

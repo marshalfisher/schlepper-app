@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const { Op } = require('sequelize');
+
 //node fetch wasn't working, this code that fixes it is from Stack Overflow and I Do Not Understand It
 const fetch = (...args) =>
   import('node-fetch').then(({ default: fetch }) => fetch(...args));
@@ -17,7 +18,6 @@ async function login(req, res) {
       return res.status(409).send({ error: '409', message: 'Invalid credentials' });
     const validatedUser = await bcrypt.compare(password, user.password);
     if (validatedUser) {
-      console.log('validated user: ' + user.id);
       const accessToken = jwt.sign({ _id: user.id }, SECRET_KEY);
 
       res.status(200).send({

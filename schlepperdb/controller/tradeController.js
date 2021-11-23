@@ -32,7 +32,6 @@ async function deleteTrade(req, res) {
 async function getTrades(req, res) {
   try {
     const { user } = req.body;
-    console.log(user);
     const trades = await db.Trade.findAll({
       where: { [Op.or]: [{ user1: user }, { user2: user }] },
     });

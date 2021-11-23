@@ -60,7 +60,7 @@ const Profile: React.FC<Props> = username => {
       console.log(e);
     }
   }
-  console.log('PROFILE', username);
+
   //gets user info on mount
   useEffect(() => {
     async function getUserInfo(): Promise<void> {

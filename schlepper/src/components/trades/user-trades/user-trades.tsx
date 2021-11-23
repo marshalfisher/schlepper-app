@@ -17,6 +17,7 @@ const UserTrades: React.FC = () => {
     const incomingTrades = await apiService.getTrades(user);
     if (incomingTrades) changeTrades(incomingTrades);
   }
+  console.log(trades);
 
   //gets trades from server on mount
   useEffect(() => {

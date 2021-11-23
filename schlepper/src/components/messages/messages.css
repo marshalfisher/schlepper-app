@@ -1,4 +1,24 @@
 .messages-container {
-    margin-top: 100px;
-    text-align: center;
+  margin-top: 100px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+form {
+  margin-top: 1rem;
+}
+
+input {
+  margin-top: 0;
+}
+
+.info-input--location {
+  padding: 1rem;
+  width: 80%;
+}
+
+.info-input--date {
+  display: block;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }

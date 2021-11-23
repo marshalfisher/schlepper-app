@@ -214,7 +214,6 @@ apiService.deleteMessage = (id: string): Promise<Message> => {
 
 //gets users's trades
 apiService.getTrades = (user: string): Promise<Trade> => {
-  //user
   return fetch(`${BASE_URL}/getTrades`, {
     method: 'POST',
     headers: {
@@ -228,7 +227,6 @@ apiService.getTrades = (user: string): Promise<Trade> => {
 
 //adds trade to database
 apiService.makeTrade = (object: object): Promise<Trade> => {
-  //user1, user2, offer1, offer2, location, additional
   return fetch(`${BASE_URL}/makeTrade`, {
     method: 'POST',
     headers: {
@@ -242,7 +240,6 @@ apiService.makeTrade = (object: object): Promise<Trade> => {
 
 //deletes trade from database
 apiService.deleteTrade = (id: string): Promise<Trade> => {
-  //id
   return fetch(`${BASE_URL}/deleteTrade`, {
     method: 'DELETE',
     headers: {

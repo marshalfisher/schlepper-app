@@ -12,18 +12,6 @@ import moment from 'moment';
 import Map from '../map/map';
 
 const MessagesTab: React.FC = () => {
-  const [position, setPosition] = useState<any>({
-    latitude: '',
-    longitude: '',
-  });
-  navigator.geolocation.getCurrentPosition(storeCurrentPosition);
-  function storeCurrentPosition(position: any) {
-    setPosition({
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude,
-    });
-  }
-
   //state
   const [messages, changeMessages] = useState<Message[]>([]);
   const [trading, changeTrading] = useState<boolean>(false);
@@ -35,6 +23,10 @@ const MessagesTab: React.FC = () => {
   const [location, setLocation] = useState<string>('');
   const [additionalInfo, setAdditionalInfo] = useState<string>('');
   const [calendarLink, setCalendarLink] = useState<string>('');
+  const [position, setPosition] = useState<any>({
+    latitude: '',
+    longitude: '',
+  });
 
   //redux
   const user = useAppSelector<string>(state => state.user);
@@ -43,6 +35,10 @@ const MessagesTab: React.FC = () => {
 
   const handleChange = (value: string, setter: (value: string) => void) => {
     setter(value);
+  };
+
+  const onSearchLocation = (e: any) => {
+    setLocation(e.result.place_name);
   };
 
   //navigates to 'reply'
@@ -80,8 +76,7 @@ const MessagesTab: React.FC = () => {
       user1offer: tradeInfo?.offeredAlbum,
       user2offer: tradeInfo?.album,
       location: location,
-      date: date,
-      additional: additionalInfo,
+      additional: date,
     };
     await apiService.makeTrade(tradeObject);
     const resUserData = await apiService.getUser({ username: tradeInfo?.fromUser });
@@ -136,6 +131,13 @@ const MessagesTab: React.FC = () => {
 
   //sets up state on mount
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition(storeCurrentPosition);
+    function storeCurrentPosition(position: any) {
+      setPosition({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    }
     async function getMessages(): Promise<void> {
       const messageArray = await apiService.getMessages(user);
       messageArray.sort((a: Message) => a.id);
@@ -160,19 +162,11 @@ const MessagesTab: React.FC = () => {
             Trade between {tradeInfo.fromUser} & {tradeInfo.toUser}
           </h2>
           <h2>Trading: </h2>
-          {albumInfo1 && (
-            <>
-              <h3>{albumInfo1.title}</h3>
-              <img src={albumInfo1.thumb} />
-            </>
-          )}
+          <h3>{albumInfo1?.title}</h3>
+          <img src={albumInfo1?.thumb} />
           <h2>For: </h2>
-          {albumInfo2 && (
-            <>
-              <h3>{albumInfo2.title}</h3>
-              <img src={albumInfo2.thumb} />
-            </>
-          )}
+          <h3>{albumInfo2?.title}</h3>
+          <img src={albumInfo2?.thumb} />
           <form onSubmit={handleSubmit}>
             <h3>Date and time:</h3>
             <input
@@ -184,17 +178,9 @@ const MessagesTab: React.FC = () => {
               onChange={e => handleChange(e.target.value, setDate)}
             />
             <h2>Location:</h2>
-            <Map position={position} value={location} />
-
-            <h2>Additional Info:</h2>
-            <input
-              type='text'
-              placeholder='Add any additional infromation you want...'
-              name='additionalInfo'
-              className='info-input--location'
-              value={additionalInfo}
-              onChange={e => handleChange(e.target.value, setAdditionalInfo)}
-            />
+            {position.latitude != '' && (
+              <Map position={position} onSearchLocation={onSearchLocation} />
+            )}
             <input type='submit' value='Send Trade' className='button' />
           </form>
         </div>

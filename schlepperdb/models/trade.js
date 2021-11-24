@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
     user2offer: DataTypes.STRING,
     location: DataTypes.STRING,
     additional: DataTypes.STRING,
-    date: DataTypes.STRING,
   });
   return Trade;
 };

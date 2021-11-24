@@ -6,5 +6,4 @@ export interface Trade {
   user2offer: string;
   additional: string;
   id: string;
-  date: string;
 }

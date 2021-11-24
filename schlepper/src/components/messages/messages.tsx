@@ -33,6 +33,7 @@ const MessagesTab: React.FC = () => {
   const [albumInfo2, changeAlbumInfo2] = useState<Album | null>(null);
   const [date, setDate] = useState<string>('');
   const [location, setLocation] = useState<string>('');
+  const [additionalInfo, setAdditionalInfo] = useState<string>('');
   const [calendarLink, setCalendarLink] = useState<string>('');
 
   //redux
@@ -79,7 +80,8 @@ const MessagesTab: React.FC = () => {
       user1offer: tradeInfo?.offeredAlbum,
       user2offer: tradeInfo?.album,
       location: location,
-      additional: date,
+      date: date,
+      additional: additionalInfo,
     };
     await apiService.makeTrade(tradeObject);
     const resUserData = await apiService.getUser({ username: tradeInfo?.fromUser });
@@ -87,7 +89,7 @@ const MessagesTab: React.FC = () => {
     changeTradeStatus(true);
   }
 
-  // Ad event to Google Calendat
+  // Ad event to Google Calendar
   const addEventToCalendar = (email: string) => {
     gapi.load('client:auth2', () => {
       gapi.client.init({
@@ -172,15 +174,6 @@ const MessagesTab: React.FC = () => {
             </>
           )}
           <form onSubmit={handleSubmit}>
-            <h2>Location:</h2>
-            <input
-              type='text'
-              placeholder='Specify location...'
-              name='message'
-              className='info-input--location'
-              value={location}
-              onChange={e => handleChange(e.target.value, setLocation)}
-            />
             <h3>Date and time:</h3>
             <input
               type='datetime-local'
@@ -190,8 +183,18 @@ const MessagesTab: React.FC = () => {
               value={date}
               onChange={e => handleChange(e.target.value, setDate)}
             />
-            <Map position={position} />
+            <h2>Location:</h2>
+            <Map position={position} value={location} />
 
+            <h2>Additional Info:</h2>
+            <input
+              type='text'
+              placeholder='Add any additional infromation you want...'
+              name='additionalInfo'
+              className='info-input--location'
+              value={additionalInfo}
+              onChange={e => handleChange(e.target.value, setAdditionalInfo)}
+            />
             <input type='submit' value='Send Trade' className='button' />
           </form>
         </div>

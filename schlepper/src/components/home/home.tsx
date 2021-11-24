@@ -10,9 +10,7 @@ import './home.css';
 import Profile from '../profile/profile';
 import UserTrades from '../trades/user-trades/user-trades';
 import { useAppSelector } from '../../redux/hooks';
-import React from 'react';
 
-//the main component that's displayed after logging in.
 const Home: React.FC = () => {
   //redux
   const username = useAppSelector<string>(state => state.user);

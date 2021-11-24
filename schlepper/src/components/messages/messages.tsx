@@ -9,8 +9,21 @@ import { Message } from '../../interfaces/Message';
 import { Album } from '../../interfaces/Album';
 import { gapi } from 'gapi-script';
 import moment from 'moment';
+import Map from '../map/map';
 
 const MessagesTab: React.FC = () => {
+  const [position, setPosition] = useState<any>({
+    latitude: '',
+    longitude: '',
+  });
+  navigator.geolocation.getCurrentPosition(storeCurrentPosition);
+  function storeCurrentPosition(position: any) {
+    setPosition({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+    });
+  }
+
   //state
   const [messages, changeMessages] = useState<Message[]>([]);
   const [trading, changeTrading] = useState<boolean>(false);
@@ -177,6 +190,8 @@ const MessagesTab: React.FC = () => {
               value={date}
               onChange={e => handleChange(e.target.value, setDate)}
             />
+            <Map position={position} />
+
             <input type='submit' value='Send Trade' className='button' />
           </form>
         </div>

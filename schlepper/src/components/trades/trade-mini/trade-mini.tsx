@@ -28,7 +28,7 @@ const TradeMini: React.FC<Props> = ({ tradeInfo, handleClick }) => {
 
   return (
     <div>
-      <div className='mini' style={{ width: '80%', margin: '0 auto' }}>
+      <div className='mini' style={{ width: '70%', margin: '0 auto' }}>
         <img src={album1.thumb} />
         <div className='trade-info'>
           <div className='user1'>

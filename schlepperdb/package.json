@@ -6,6 +6,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "faker": "^5.5.3",
+    "jest": "*",
     "jsonwebtoken": "^8.5.1",
     "mocha": "*",
     "node-fetch": "^2.6.6",
@@ -15,8 +16,7 @@
     "pubsub-js": "^1.9.4",
     "sequelize": "^6.9.0",
     "sinon": "^12.0.1",
-    "supertest": "^6.1.6",
-    "jest": "*"
+    "supertest": "^6.1.6"
   },
   "scripts": {
     "test": "mocha"

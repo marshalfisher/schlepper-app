@@ -24,7 +24,7 @@ async function login(req, res) {
     console.log(e);
     res.status(500);
   }
-}; 
+};
 
 async function addUser(req, res) {
   try {
@@ -51,7 +51,7 @@ async function addUser(req, res) {
     console.log(e);
     res.status(500);
   }
-}; 
+};
 
 async function addCollection (req, res) {
   try{
@@ -94,7 +94,7 @@ async function callAPI (req, res) {
   try {
     const {id} = req.body;
     const resAPI = await fetch(`https://api.discogs.com/releases/${id}`, {
-      headers: { 
+      headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Discogs key=BOmgHpLNRiuTWXZGgEPm, secret=sIVZFKlfhSpDjQglswQeYRNGJgfXfyjS',
       'User-Agent': 'Schlepper/0.0.1'
@@ -112,7 +112,7 @@ async function searchAPI (req, res) {
   try {
     const {query, type} = req.body;
     const resAPI = await fetch(`https://api.discogs.com//database/search?q=${query}&type=${type}`, {
-      headers: { 
+      headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Discogs key=BOmgHpLNRiuTWXZGgEPm, secret=sIVZFKlfhSpDjQglswQeYRNGJgfXfyjS',
       'User-Agent': 'Schlepper/0.0.1'
@@ -141,7 +141,7 @@ async function deleteCollection (req, res) {
   } catch (e) {
     console.log(e);
     res.status(500);
-  } 
+  }
 };
 
 async function deleteWant (req, res) {
@@ -189,7 +189,7 @@ async function sendImage (req,res) {
     if (req.files === null) {
       return res.status(400).send('No file sent')
     }
-    
+
     const directory = path.join(__dirname, '../../schlepper/public/uploads/')
     const image = req.files.image
     image.mv(directory + image.name, (e) => {

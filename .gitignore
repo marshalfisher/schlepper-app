@@ -1,2 +1,7 @@
 .gitignore
 schlepperdb/node_modules
+schlepperdb\node_modules
+schlepperdb/node_modules/
+schlepperdb/node_modules/.bin/
+schlepperdb/node_modules/.bin/color-support
+schlepperdb/node_modules/.bin/detect-libc

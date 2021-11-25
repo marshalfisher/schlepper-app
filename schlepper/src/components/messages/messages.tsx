@@ -21,7 +21,6 @@ const MessagesTab: React.FC = () => {
   const [albumInfo2, changeAlbumInfo2] = useState<Album | null>(null);
   const [date, setDate] = useState<string>('');
   const [location, setLocation] = useState<string>('');
-  const [additionalInfo, setAdditionalInfo] = useState<string>('');
   const [calendarLink, setCalendarLink] = useState<string>('');
   const [position, setPosition] = useState<any>({
     latitude: '',
@@ -37,7 +36,7 @@ const MessagesTab: React.FC = () => {
     setter(value);
   };
 
-  const onSearchLocation = (e: any) => {
+  const onSearchLocation = (e: any): void => {
     setLocation(e.result.place_name);
   };
 
@@ -129,7 +128,6 @@ const MessagesTab: React.FC = () => {
     });
   };
 
-  //sets up state on mount
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(storeCurrentPosition);
     function storeCurrentPosition(position: any) {

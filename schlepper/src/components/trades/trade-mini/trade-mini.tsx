@@ -3,6 +3,7 @@ import apiService from '../../../APIservice';
 import './trade-mini.css';
 import { Trade } from '../../../interfaces/Trade';
 import { Album } from '../../../interfaces/Album';
+import moment from 'moment';
 
 interface Props {
   tradeInfo: Trade;
@@ -27,7 +28,7 @@ const TradeMini: React.FC<Props> = ({ tradeInfo, handleClick }) => {
 
   return (
     <div>
-      <div className='mini'>
+      <div className='mini' style={{ width: '80%', margin: '0 auto' }}>
         <img src={album1.thumb} />
         <div className='trade-info'>
           <div className='user1'>
@@ -43,7 +44,9 @@ const TradeMini: React.FC<Props> = ({ tradeInfo, handleClick }) => {
       </div>
       <div className='lower-info'>
         <p>Location: {tradeInfo.location}</p>
-        {tradeInfo.additional && <p>Additional: {tradeInfo.additional}</p>}
+        {tradeInfo.additional && (
+          <p>Date: {moment(tradeInfo.additional).format('DD/MM/YY')}</p>
+        )}
         <button onClick={handleClick}>Trade Completed</button>
       </div>
     </div>

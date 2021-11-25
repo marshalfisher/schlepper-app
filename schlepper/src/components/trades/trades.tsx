@@ -28,8 +28,6 @@ const TradesTab: React.FC = () => {
       <h1>Browse Trades</h1>
       <label>Select State:</label>
       <select id='state' name='state' onChange={handleChange}>
-        {/* this just straight up should be an array that's mapped to options
-        it's used multiple times and didn't feel lke changing it.*/}
         <option value='al'>Alabama</option>
         <option value='ak'>Alaska</option>
         <option value='az'>Arizona</option>

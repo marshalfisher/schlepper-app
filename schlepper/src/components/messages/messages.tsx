@@ -9,6 +9,7 @@ import { Message } from '../../interfaces/Message';
 import { Album } from '../../interfaces/Album';
 import { gapi } from 'gapi-script';
 import moment from 'moment';
+import Map from '../map/map';
 
 const MessagesTab: React.FC = () => {
   //state
@@ -20,7 +21,12 @@ const MessagesTab: React.FC = () => {
   const [albumInfo2, changeAlbumInfo2] = useState<Album | null>(null);
   const [date, setDate] = useState<string>('');
   const [location, setLocation] = useState<string>('');
+  const [additionalInfo, setAdditionalInfo] = useState<string>('');
   const [calendarLink, setCalendarLink] = useState<string>('');
+  const [position, setPosition] = useState<any>({
+    latitude: '',
+    longitude: '',
+  });
 
   //redux
   const user = useAppSelector<string>(state => state.user);
@@ -29,6 +35,10 @@ const MessagesTab: React.FC = () => {
 
   const handleChange = (value: string, setter: (value: string) => void) => {
     setter(value);
+  };
+
+  const onSearchLocation = (e: any) => {
+    setLocation(e.result.place_name);
   };
 
   //navigates to 'reply'
@@ -74,7 +84,7 @@ const MessagesTab: React.FC = () => {
     changeTradeStatus(true);
   }
 
-  // Ad event to Google Calendat
+  // Ad event to Google Calendar
   const addEventToCalendar = (email: string) => {
     gapi.load('client:auth2', () => {
       gapi.client.init({
@@ -121,6 +131,13 @@ const MessagesTab: React.FC = () => {
 
   //sets up state on mount
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition(storeCurrentPosition);
+    function storeCurrentPosition(position: any) {
+      setPosition({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    }
     async function getMessages(): Promise<void> {
       const messageArray = await apiService.getMessages(user);
       messageArray.sort((a: Message) => a.id);
@@ -145,29 +162,12 @@ const MessagesTab: React.FC = () => {
             Trade between {tradeInfo.fromUser} & {tradeInfo.toUser}
           </h2>
           <h2>Trading: </h2>
-          {albumInfo1 && (
-            <>
-              <h3>{albumInfo1.title}</h3>
-              <img src={albumInfo1.thumb} />
-            </>
-          )}
+          <h3>{albumInfo1?.title}</h3>
+          <img src={albumInfo1?.thumb} />
           <h2>For: </h2>
-          {albumInfo2 && (
-            <>
-              <h3>{albumInfo2.title}</h3>
-              <img src={albumInfo2.thumb} />
-            </>
-          )}
+          <h3>{albumInfo2?.title}</h3>
+          <img src={albumInfo2?.thumb} />
           <form onSubmit={handleSubmit}>
-            <h2>Location:</h2>
-            <input
-              type='text'
-              placeholder='Specify location...'
-              name='message'
-              className='info-input--location'
-              value={location}
-              onChange={e => handleChange(e.target.value, setLocation)}
-            />
             <h3>Date and time:</h3>
             <input
               type='datetime-local'
@@ -177,6 +177,10 @@ const MessagesTab: React.FC = () => {
               value={date}
               onChange={e => handleChange(e.target.value, setDate)}
             />
+            <h2>Location:</h2>
+            {position.latitude != '' && (
+              <Map position={position} onSearchLocation={onSearchLocation} />
+            )}
             <input type='submit' value='Send Trade' className='button' />
           </form>
         </div>

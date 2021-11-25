@@ -4,7 +4,6 @@ const { Op } = require('sequelize');
 //adds trade to database
 async function makeTrade(req, res) {
   try {
-    console.log('here ' + req.body);
     const newTrade = await db.Trade.create(req.body);
     if (newTrade) {
       res.status(201).send(newTrade);

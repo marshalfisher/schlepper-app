@@ -6,7 +6,8 @@ import { changeCollection, changeWants } from '../../redux/actions';
 
 const Dashboard: React.FC = () => {
   //redux
-  const username = useAppSelector<string>(state => state.user);
+
+  const username = useAppSelector<any>(state => state.user);
   let collection = useAppSelector<string[]>(state => state.collection.collection);
   let wants = useAppSelector<string[]>(state => state.wants.wants);
   const dispatch = useAppDispatch();
@@ -22,10 +23,12 @@ const Dashboard: React.FC = () => {
     const newWants = await apiService.removeWant({ username, album });
     dispatch(changeWants(newWants));
   }
+   
+  console.log(username)
 
   return (
     <div className='dashboard'>
-      <h2>Hello {username}</h2>
+      <h2>Hello {username.user}</h2>
       <div className='Collection'>
         <h3>Your Collection</h3>
         {collection.map((a: string) => (

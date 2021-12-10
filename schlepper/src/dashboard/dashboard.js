@@ -18,7 +18,7 @@ function Dashboard () {
     dispatch(changeCollection(newCollection));
   }
     
-  //deletes single item from user wants
+  //deletes single item from user wants.
   async function deleteWant(username, album) {
     const newWants = await apiService.removeWant({username, album});
     dispatch(changeWants(newWants));

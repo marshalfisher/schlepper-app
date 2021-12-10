@@ -3,12 +3,14 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const { Op } = require('sequelize');
+require('dotenv').config();
 
 //node fetch wasn't working, this code that fixes it is from Stack Overflow and I Do Not Understand It
 const fetch = (...args) =>
   import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-const SECRET_KEY = 'B-)';
+const SECRET_KEY = process.env.SECRET_KEY;
+console.log(SECRET_KEY)
 
 async function login(req, res) {
   try {

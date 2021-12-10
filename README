@@ -5,6 +5,8 @@ GETTING STARTED
 -run 'npm i' in both 'schlepper' and 'schlepper db folders
 -in the 'schlepperdb' folder, run 'index.js' with node
 -in the 'schlepper' folder, run react
+-in the client .env, define REACT_APP_BACKEND_LINK with link to you backend
+-in the backedn .env define SECRET_KEY for bcrypt
 
 TECH STACK
 Frontend was made with React and JavaScript, with some sections refactored into TypeScript. Libraries used include Axios, Redux, React-Router-Dom, and React-Map-GL

@@ -8,7 +8,7 @@ const Navbar = () => {
   //redux  
   const auth = useSelector(state => state.auth.auth);
   const dispatch = useDispatch();
-
+  console.log(auth)
   //logs user out
   function handleClick () {
     dispatch(logOut())
@@ -25,7 +25,7 @@ const Navbar = () => {
   return(
     <div className="navbar">
       <h3>Schlepper</h3>
-      {auth && 
+      {auth !== undefined && 
       <div className="links">
       <Link to='/' style={style}>Dashboard |</Link>
       <Link to='/messages' style={style}>Messages |</Link>

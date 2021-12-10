@@ -29,7 +29,7 @@ function Dashboard () {
       <h2>Hello {username}</h2>
       <div className="Collection">
         <h3>Your Collection</h3>
-        {collection.map(a => <MiniAlbum key={a}
+        {collection && collection.map(a => <MiniAlbum key={a}
           albumID={a}
           username={username}
           handleClick={deleteCollection}
@@ -38,7 +38,7 @@ function Dashboard () {
       </div>
       <div className="Wants">
       <h3>Your Wants</h3>
-      {wants.map(a => <MiniAlbum key={a}
+      {wants && wants.map(a => <MiniAlbum key={a}
         albumID={a}
         username={username}
         handleClick={deleteWant}

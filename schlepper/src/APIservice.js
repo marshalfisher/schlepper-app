@@ -6,15 +6,15 @@ const apiService = {};
 
 //logs user in
 apiService.login = (userObject) => {
-    return fetch(`${BASE_URL}/login`, {
-            method: 'POST',
-            credentials: 'include',
-            mode: 'cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(userObject),
-          })
-            .then(res => res.json())
-            .catch((err) => console.log(err));
+  return fetch(`${BASE_URL}/login`, {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userObject),
+  })
+    .then(res => res.json())
+    .catch((err) => console.log(err));
 };
 
 //creates a new user

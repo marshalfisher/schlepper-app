@@ -189,7 +189,6 @@ async function sendImage (req,res) {
     if (req.files === null) {
       return res.status(400).send('No file sent')
     }
-    
     const directory = path.join(__dirname, '../../schlepper/public/uploads/')
     const image = req.files.image
     image.mv(directory + image.name, (e) => {

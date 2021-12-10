@@ -41,12 +41,12 @@ function Profile (username) {
   async function handleClick (e) {
     e.preventDefault();
     try {
-    const tag = image.name.slice(-3);
-    if (tag === 'png' || tag === 'jpg' || tag === 'gif') {
-      await apiService.sendImage(image);
-      await apiService.updateUser(user, 'photo', image.name);
-      changeDisplayedPhoto(image.name);
-    } else alert('image format not supported');
+      const tag = image.name.slice(-3);
+      if (tag === 'png' || tag === 'jpg' || tag === 'gif') {
+        await apiService.sendImage(image);
+        await apiService.updateUser(user, 'photo', image.name);
+        changeDisplayedPhoto(image.name);
+      } else alert('image format not supported');
     } catch (e) {
       console.log(e);
     }
